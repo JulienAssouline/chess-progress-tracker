@@ -9,7 +9,6 @@ const App: React.FC = () => {
   return (
     <DataProvider>
     <div className="App">
-      <h1> Chess app </h1>
       <Rating />
     </div>
     </DataProvider>

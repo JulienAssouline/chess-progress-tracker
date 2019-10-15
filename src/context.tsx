@@ -23,7 +23,9 @@ export const DataProvider = (props: any) => {
 
           const allData = await Promise.all(promises);
 
-          let results = allData.map((d: {data: {games: []}}) => d.data.games);
+          let results = allData.map(
+            (d: { data: { games: [] } }) => d.data.games
+          );
 
           results = results.flat();
 
@@ -36,6 +38,7 @@ export const DataProvider = (props: any) => {
     fetchData();
   }, []);
 
+  if (error) return <div>Sorry there was an error :(</div>;
   if (data === undefined) return <div>...loading</div>;
 
   return (

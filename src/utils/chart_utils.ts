@@ -1,5 +1,5 @@
-export let w: number = 1000,
-  h: number = 500;
+export let w: number = 900,
+  h: number = 400;
 
   interface Dir {
     right: number,
