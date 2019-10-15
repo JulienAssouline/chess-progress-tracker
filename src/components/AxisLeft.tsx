@@ -6,10 +6,9 @@ interface Props {
 
 export const AxisLeft: React.FC<Props> = ({ yScale }) =>
   yScale.ticks(5).map((tickValue: number) => (
-    <g className="tick">
+    <g key={tickValue} className="tick">
       <text
-        key={tickValue}
-        style={{ textAnchor: 'end' }}
+        style={{ textAnchor: "end" }}
         x={-3}
         dy=".32em"
         y={yScale(tickValue)}

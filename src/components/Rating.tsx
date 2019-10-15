@@ -1,31 +1,28 @@
-import React, {useEffect, useState} from "react";
-import axios from "axios";
-import RatingTrend from "./RatingTrend"
+import React, { useContext } from "react";
+import RatingTrend from "./RatingTrend";
+import { DataContext } from "../context";
+import { Game } from "./interfaces/Rating.interfaces";
 
 const Rating: React.FC = () => {
-  const [data, setData] = useState([])
+  const data = useContext(DataContext);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await axios(
-          `https://api.chess.com/pub/player/julienassouline/games/2019/10`
-        );
+  if (data.length === 0) return <div>...loading</div>;
 
-        setData(result.data.games);
-      } catch (error) {
-        console.log(error)
-      }
-    };
+  const latestGame: Game = data[data.length - 1] as Game;
 
-    fetchData();
-  }, [])
+  let currentRating: undefined | number;
 
-  if (data.length === 0) { return <div>...loading</div>}
+  if (latestGame) {
+    currentRating =
+      latestGame.black.username === "JulienAssouline"
+        ? latestGame.black.rating
+        : latestGame.white.rating;
+  }
 
   return (
     <div className="rating-container">
-      <RatingTrend data = {data} />
+      <h1> Current Rating: {currentRating}</h1>
+      <RatingTrend data={data as []} />
     </div>
   );
 };

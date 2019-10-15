@@ -8,12 +8,12 @@ export let w: number = 1000,
     bottom: number
   }
 
-export let margin = <Dir> {
+export let margin = {
   right: 40,
   left: 40,
   top: 40,
   bottom: 40
-};
+} as Dir;
 
 export let width: number = w - margin.right - margin.left,
   height: number = h - margin.top - margin.bottom;
