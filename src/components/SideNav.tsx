@@ -7,6 +7,7 @@ import {
   ListItem,
   ListItemText
 } from "@material-ui/core";
+import { RouteComponentProps, withRouter } from "react-router-dom"
 
 const drawerWidth = 100;
 
@@ -32,7 +33,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const SideNav: React.FC = () => {
+  interface DetailProps extends RouteComponentProps<{push: any}> {
+
+  }
+
+const navText: string[] = ["Home", "vs Pazuzu", "Monthly", "Summary"]
+
+const SideNav: React.FC<DetailProps> = (props) => {
   const classes = useStyles();
   return (
     <Drawer
@@ -45,14 +52,14 @@ const SideNav: React.FC = () => {
     >
       <Divider />
       <List className={classes.listInfo}>
-        {["Home", "vs Pazuzu", "Monthly", "Summary"].map((text, index) => (
+        {navText.map((text: string, index) => (
           <div key={text}>
             {text === "Home" ? (
-              <ListItem className={classes.listItem} button>
+              <ListItem onClick = {() => props.history.push("/")} className={classes.listItem} button>
                 <ListItemText primary={text} />
               </ListItem>
             ) : (
-              <ListItem button key={text}>
+              <ListItem onClick = {() => props.history.push("/rival")} button key={text}>
                 <ListItemText secondary={text} />
               </ListItem>
             )}
@@ -64,4 +71,4 @@ const SideNav: React.FC = () => {
   );
 };
 
-export default SideNav;
+export default withRouter(SideNav);
