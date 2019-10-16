@@ -7,15 +7,16 @@ import {
   ListItem,
   ListItemText
 } from "@material-ui/core";
-const drawerWidth = 120;
+
+const drawerWidth = 100;
 
 const useStyles = makeStyles((theme: Theme) => ({
   drawer: {
     width: drawerWidth,
-    flexShrink: 0,
+    flexShrink: 0
   },
   drawerPaper: {
-    width: drawerWidth,
+    width: drawerWidth
   },
   listInfo: {
     display: "flex",
@@ -24,8 +25,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: "space-evenly"
   },
   listItem: {
-    // paddingTop: 20,
-    // paddingBottom: 20
+    backgroundColor: "#f6f8fc",
+    borderLeftColor: "#6c75c1",
+    borderLeft: 6,
+    borderLeftStyle: "solid"
   }
 }));
 
@@ -43,9 +46,17 @@ const SideNav: React.FC = () => {
       <Divider />
       <List className={classes.listInfo}>
         {["Home", "vs Pazuzu", "Monthly", "Summary"].map((text, index) => (
-          <ListItem className={classes.listItem} button key={text}>
-            <ListItemText primary={text} />
-          </ListItem>
+          <div key={text}>
+            {text === "Home" ? (
+              <ListItem className={classes.listItem} button>
+                <ListItemText primary={text} />
+              </ListItem>
+            ) : (
+              <ListItem button key={text}>
+                <ListItemText secondary={text} />
+              </ListItem>
+            )}
+          </div>
         ))}
       </List>
       <Divider />

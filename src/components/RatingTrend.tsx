@@ -5,22 +5,20 @@ import { extent, max } from "d3-array";
 import { line, curveMonotoneX } from "d3-shape";
 import { timeParse } from "d3-time-format";
 import { AxisBottom } from "./Bottom";
-import {AxisLeft} from "./AxisLeft"
-import {Props, LineType} from "./interfaces/RatingTrend.interface"
-import { Paper } from "@material-ui/core"
-import { makeStyles } from '@material-ui/core/styles';
+import { AxisLeft } from "./AxisLeft";
+import { Props, LineType } from "./interfaces/RatingTrend.interface";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   root: {
     paddingLeft: 10,
     backgroundColor: "#f0f4f9"
-  },
+  }
 }));
 
 const RatingTrend: React.FC<Props> = ({ data }) => {
   const parseTime = timeParse("%Y.%m.%d %H:%M:%S");
   const classes = useStyles();
-
 
   data.forEach(d => {
     d.date = parseTime(
@@ -48,7 +46,9 @@ const RatingTrend: React.FC<Props> = ({ data }) => {
     .domain([ratingMin as number, ratingMax as number])
     .range([height, 0]);
 
-    const dataFiltered = data.filter((d: {date: Date}) => { return d.date >= dateMin})
+  const dataFiltered = data.filter((d: { date: Date }) => {
+    return d.date >= dateMin;
+  });
 
   const path = line<LineType>()
     .x(d => xScale(d.date))
@@ -61,7 +61,7 @@ const RatingTrend: React.FC<Props> = ({ data }) => {
 
   return (
     <div className="trend-container">
-      <h2 className = "trend-title"> Chess.com rating over time </h2>
+      <h2 className="trend-title"> Chess.com rating over time </h2>
       <svg width={w} height={h}>
         <g transform={`translate(${margin.left},${margin.top})`}>
           <AxisBottom
@@ -69,7 +69,7 @@ const RatingTrend: React.FC<Props> = ({ data }) => {
             height={height}
             tickFormat={xtickFormat}
           />
-          <AxisLeft width = {width} yScale = {yScale} />
+          <AxisLeft width={width} yScale={yScale} />
           <path
             d={path(dataFiltered) as string}
             style={{ fill: "none", stroke: "#6b75c4", strokeWidth: 3 }}

@@ -5,7 +5,6 @@ import { DataContext } from "../context";
 import { Stats, Result } from "./interfaces/Rating.interfaces";
 import { Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import SideNav from "./SideNav"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -13,6 +12,10 @@ const useStyles = makeStyles(theme => ({
     width: 150,
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    textAlign: "left",
+    boxShadow: "none"
   },
   rating: {
     padding: 15,
@@ -20,9 +23,15 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: "#6a75ca",
     color: "white",
     borderTopLeftRadius: 0,
-    borderTopRightRadius: 0
+    borderTopRightRadius: 0,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    textAlign: "left",
+    boxShadow: "none"
   }
 }));
+
+const textStyle = { color: "#9597ab", fontSize: 14 };
 
 const Rating: React.FC = () => {
   const [stats, setStats] = useState<Stats | undefined>(undefined);
@@ -49,28 +58,28 @@ const Rating: React.FC = () => {
 
   return (
     <div className="rating-container">
-      <div className = "data-container">
-      <div className="numbers-containers">
-        <Paper className={classes.root}>
-          <h3> Total Games played </h3>
-          <h1> {data.length} </h1>
-        </Paper>
-        <Paper className={classes.rating}>
-          <h3> Current Rating </h3>
-          <h1>{stats.chess_blitz.last.rating}</h1>
-        </Paper>
-        <Paper className={classes.root}>
-          <h3> Win Percentage </h3>
-          <h1>{`${Math.round(
-            (stats.chess_blitz.record.win / data.length) * 100
-          )}%`}</h1>
-        </Paper>
-        <Paper className={classes.root}>
-          <h3> Best Win </h3>
-          <h1>{stats.chess_blitz.best.rating}</h1>
-        </Paper>
-      </div>
-      <RatingTrend data={data as []} />
+      <div className="data-container">
+        <div className="numbers-containers">
+          <Paper className={classes.root}>
+            <h2> {data.length} </h2>
+            <p style={textStyle}> Total Games played </p>
+          </Paper>
+          <Paper className={classes.rating}>
+            <h1>{stats.chess_blitz.last.rating}</h1>
+            <p> Current Rating </p>
+          </Paper>
+          <Paper className={classes.root}>
+            <h2>{`${Math.round(
+              (stats.chess_blitz.record.win / data.length) * 100
+            )}%`}</h2>
+            <p style={textStyle}> Win Percentage </p>
+          </Paper>
+          <Paper className={classes.root}>
+            <h2>{stats.chess_blitz.best.rating}</h2>
+            <p style={textStyle}> Best Win </p>
+          </Paper>
+        </div>
+        <RatingTrend data={data as []} />
       </div>
     </div>
   );
