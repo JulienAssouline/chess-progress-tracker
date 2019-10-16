@@ -61,7 +61,6 @@ const RatingTrend: React.FC<Props> = ({ data }) => {
 
   return (
     <div className="trend-container">
-      <Paper className={classes.root}>
       <h2 className = "trend-title"> Chess.com rating over time </h2>
       <svg width={w} height={h}>
         <g transform={`translate(${margin.left},${margin.top})`}>
@@ -70,14 +69,13 @@ const RatingTrend: React.FC<Props> = ({ data }) => {
             height={height}
             tickFormat={xtickFormat}
           />
-          <AxisLeft yScale = {yScale} />
+          <AxisLeft width = {width} yScale = {yScale} />
           <path
             d={path(dataFiltered) as string}
             style={{ fill: "none", stroke: "#6b75c4", strokeWidth: 3 }}
           />
         </g>
       </svg>
-      </Paper>
     </div>
   );
 };

@@ -6,7 +6,7 @@ body {
 }
 
 .trend-container {
-  width: 85%;
+  width: 100%;
   margin: auto;
 }
 
@@ -20,4 +20,15 @@ body {
   flex-flow: row;
   justify-content: space-evenly;
   padding-bottom: 10px;
+}
+
+.data-containe {
+  display: flex;
+  flex-flow: column;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-flow: row;
+  margin-left: 40px;
 }

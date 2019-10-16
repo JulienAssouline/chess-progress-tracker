@@ -1,56 +1,77 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
 import RatingTrend from "./RatingTrend";
 import { DataContext } from "../context";
-import { Game } from "./interfaces/Rating.interfaces";
-import { Paper } from "@material-ui/core"
-import { makeStyles } from '@material-ui/core/styles';
+import { Stats, Result } from "./interfaces/Rating.interfaces";
+import { Paper } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import SideNav from "./SideNav"
 
 const useStyles = makeStyles(theme => ({
   root: {
     padding: 15,
-    width: 200,
+    width: 150,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
   },
   rating: {
     padding: 15,
     width: 200,
     backgroundColor: "#6a75ca",
-    color: "white"
+    color: "white",
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0
   }
 }));
 
 const Rating: React.FC = () => {
+  const [stats, setStats] = useState<Stats | undefined>(undefined);
+  const [error, setError] = useState<boolean>(false);
   const data = useContext(DataContext);
   const classes = useStyles();
 
-  if (data.length === 0) return <div>...loading</div>;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result: Result = await axios(
+          "https://api.chess.com/pub/player/julienassouline/stats"
+        );
 
-  const latestGame: Game = data[data.length - 1] as Game;
+        setStats(result.data);
+      } catch (error) {
+        setError(true);
+      }
+    };
+    fetchData();
+  }, []);
 
-  let currentRating: undefined | number;
-
-  if (latestGame) {
-    currentRating =
-      latestGame.black.username === "JulienAssouline"
-        ? latestGame.black.rating
-        : latestGame.white.rating;
-  }
+  if (data.length === 0 || !stats) return <div>...loading</div>;
 
   return (
     <div className="rating-container">
-      <div className = "numbers-containers">
-      <Paper className={classes.root}>
-        <h3> Total Games played: </h3>
-        <h1> {data.length} </h1>
-      </Paper>
-      <Paper className={classes.rating}>
-      <h3> Current Rating </h3>
-        <h1>{currentRating}</h1>
-      </Paper>
-      <Paper className={classes.root}>
-        <h3> Monthly % Change </h3>
-      </Paper>
+      <div className = "data-container">
+      <div className="numbers-containers">
+        <Paper className={classes.root}>
+          <h3> Total Games played </h3>
+          <h1> {data.length} </h1>
+        </Paper>
+        <Paper className={classes.rating}>
+          <h3> Current Rating </h3>
+          <h1>{stats.chess_blitz.last.rating}</h1>
+        </Paper>
+        <Paper className={classes.root}>
+          <h3> Win Percentage </h3>
+          <h1>{`${Math.round(
+            (stats.chess_blitz.record.win / data.length) * 100
+          )}%`}</h1>
+        </Paper>
+        <Paper className={classes.root}>
+          <h3> Best Win </h3>
+          <h1>{stats.chess_blitz.best.rating}</h1>
+        </Paper>
       </div>
       <RatingTrend data={data as []} />
+      </div>
     </div>
   );
 };
