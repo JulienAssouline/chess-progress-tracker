@@ -1,5 +1,6 @@
 import React, { useState, createContext, useEffect } from "react";
 import axios from "axios";
+import { timeParse } from "d3-time-format";
 
 export const DataContext = createContext([{}]);
 
@@ -28,6 +29,20 @@ export const DataProvider = (props: any) => {
           );
 
           results = results.flat();
+
+          const parseTime = timeParse("%Y.%m.%d %H:%M:%S");
+
+          results.forEach((d: any) => {
+            d.date = parseTime(
+              `${d.pgn
+                .split("\n")[2]
+                .replace('[Date "', "")
+                .replace('"]', "")} ${d.pgn
+                .split("\n")[19]
+                .replace('[EndTime "', "")
+                .replace('"]', "")}`
+            ) as Date;
+          });
 
           setData(results);
         }
