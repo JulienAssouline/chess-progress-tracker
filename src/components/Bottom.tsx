@@ -12,7 +12,7 @@ export const AxisBottom: React.FC<Props> = ({ xScale, height, tickFormat }) =>
       <g
         className="tick"
         key={i}
-        transform={`translate(${xScale(tickValue)},0)`}
+        transform={`translate(${xScale(tickValue)},5)`}
       >
         <text style={{ textAnchor: "middle", fontSize: 12 }} dy=".71em" y={height + 3}>
           {`${tickFormat[tickValue.getMonth()]} ${tickValue.getDate()}`}

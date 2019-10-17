@@ -41,6 +41,32 @@ const navText: string[] = ["Home", "vs Pazuzu", "Monthly", "Summary"]
 
 const SideNav: React.FC<DetailProps> = (props) => {
   const classes = useStyles();
+
+  function handleClick(e: any) {
+    if (e.target.childNodes[0].childNodes[0]) {
+      if (e.target.childNodes[0].childNodes[0].innerHTML === "vs Pazuzu") {
+        props.history.push("/rival")
+      }
+      else if (e.target.childNodes[0].childNodes[0].innerHTML === "Monthly") {
+        props.history.push("/monthly")
+      }
+      else if (e.target.childNodes[0].childNodes[0].innerHTML === "Summary") {
+        props.history.push("/summary")
+      }
+    }
+    else {
+      if (e.target.innerHTML === "vs Pazuzu") {
+        props.history.push("/rival")
+      }
+      else if (e.target.innerHTML === "Monthly") {
+        props.history.push("/monthly")
+      }
+      else if (e.target.innerHTML === "Summary") {
+        props.history.push("/summary")
+      }
+    }
+  }
+
   return (
     <Drawer
       className={classes.drawer}
@@ -59,7 +85,7 @@ const SideNav: React.FC<DetailProps> = (props) => {
                 <ListItemText primary={text} />
               </ListItem>
             ) : (
-              <ListItem onClick = {() => props.history.push("/rival")} button key={text}>
+              <ListItem onClick = {handleClick} button key={text}>
                 <ListItemText secondary={text} />
               </ListItem>
             )}

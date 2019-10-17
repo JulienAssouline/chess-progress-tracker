@@ -1,52 +1,31 @@
 import React from "react";
 import { w, h, width, height, margin, xtickFormat } from "../utils/chart_utils";
 import { scaleLinear, scaleTime, scaleOrdinal } from "d3-scale";
-import { max, min } from "d3-array";
+import { extent, max, min } from "d3-array";
 import { stack, area } from "d3-shape";
 import { AxisBottom } from "./Bottom";
-import { AxisLeft } from "./AxisLeft";
-
-export interface RivalTrendProps {
-  data: {
-    black: {
-      rating: number;
-      username: string;
-    };
-    JulienWins: number;
-    JulienDraws: number;
-    JulienLoss: number;
-    winPercentage: number;
-    lossPercentage: number;
-    drawsPercentage: number;
-    pgn: string;
-    end_time: number;
-    fen: string;
-    time_control: string;
-    time_class: string;
-    white: {
-      rating: number;
-      username: string;
-    };
-    date: Date;
-  }[];
-}
+import { RivalAxisLeft } from "./RivalAxisLeft";
+import { RivalTrendProps } from "./interfaces/RivalTrend.interface";
 
 const RivalTrend: React.FC<RivalTrendProps> = ({ data }) => {
-  console.log(data);
-
   if (data.length === 0) return <div> ...loading</div>;
 
   const keys: string[] = ["winPercentage", "lossPercentage", "drawsPercentage"];
 
   const stacks = stack().keys(keys);
 
-  const series = stacks(data as []);
+  const dateMinFilter = new Date(2019, 0, 1);
+
+  const dataFiltered = data.filter((d: { date: Date }) => {
+    return d.date >= dateMinFilter;
+  });
+
+  const [dateMin, dateMax] = extent(dataFiltered, d => d.date);
+
+  const series = stacks(dataFiltered as []);
 
   const minValue = min(series, series => min(series, d => d[0]));
   const maxPercent = max(series, series => max(series, d => d[1]));
-
-  const dateMin = new Date(2019, 0, 1);
-  const dateMax = max(data, (d: any) => d.date);
 
   const xScale = scaleTime()
     .domain([dateMin as Date, dateMax as Date])
@@ -72,6 +51,7 @@ const RivalTrend: React.FC<RivalTrendProps> = ({ data }) => {
 
   return (
     <div className="rival-trend-container">
+      <h2 className="trend-title"> Win Percentage vs Pazuzu4 </h2>
       <svg width={w} height={h}>
         <g transform={`translate(${margin.left},${margin.top})`}>
           <AxisBottom
@@ -79,6 +59,7 @@ const RivalTrend: React.FC<RivalTrendProps> = ({ data }) => {
             height={height}
             tickFormat={xtickFormat}
           />
+          <RivalAxisLeft width={width} yScale={yScale} />
           {paths}
         </g>
       </svg>

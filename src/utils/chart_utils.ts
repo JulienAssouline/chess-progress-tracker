@@ -11,7 +11,7 @@ export let w: number = 900,
 export let margin = {
   right: 40,
   left: 40,
-  top: 40,
+  top: 10,
   bottom: 40
 } as Dir;
 

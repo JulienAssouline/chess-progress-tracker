@@ -20,11 +20,10 @@ const Rival: React.FC = () => {
     d.JulienWins = winCounter;
     d.JulienDraws = drawCounter;
     d.JulienLoss = lossCounter;
-    d.Total = d.JulienWins + d.JulienDraws + d.JulienLoss
-    d.winPercentage =  (d.JulienWins / d.Total) * 100
-    d.lossPercentage =  (d.JulienLoss / d.Total) * 100
-    d.drawsPercentage =  (d.JulienDraws / d.Total) * 100
-
+    d.Total = d.JulienWins + d.JulienDraws + d.JulienLoss;
+    d.winPercentage = (d.JulienWins / d.Total) * 100;
+    d.lossPercentage = (d.JulienLoss / d.Total) * 100;
+    d.drawsPercentage = (d.JulienDraws / d.Total) * 100;
 
     if (
       (d.black.username === "JulienAssouline" && d.black.result === "win") ||

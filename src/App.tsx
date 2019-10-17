@@ -1,6 +1,8 @@
 import React from "react";
 import Rating from "./components/Rating";
 import Rival from "./components/Rival";
+import Monthly from "./components/Monthly"
+import Summary from "./components/Summary"
 import { DataProvider } from "./context";
 import SideNav from "./components/SideNav";
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -16,6 +18,8 @@ const App: React.FC = () => {
           <SideNav />
           <Route path="/" exact component = {Rating} />
           <Route path="/rival" exact component = {Rival} />
+          <Route path="/monthly" exact component = {Monthly} />
+          <Route path="/summary" exact component = {Summary} />
         </div>
         </Router>
       </div>
