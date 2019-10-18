@@ -3,7 +3,7 @@ import { DataContext } from "../context";
 import RivalTrend from "./RivalTrend";
 import { Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import TotalWinsRivalsChart from "./TotalWinsRivalsChart"
+import TotalWinsRivalsChart from "./TotalWinsRivalsChart";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,7 +34,7 @@ const Rival: React.FC = () => {
   const data = useContext(DataContext);
   const classes = useStyles();
 
-  if (data.length === 0) return <div>...loading</div>
+  if (data.length === 0) return <div>...loading</div>;
 
   const dataFiltered: any = data.filter(
     (d: any) =>
@@ -70,23 +70,23 @@ const Rival: React.FC = () => {
 
   const textStyle = { color: "#9597ab", fontSize: 14 };
 
-  const winPercentage: number = dataFiltered[dataFiltered.length - 1].winPercentage 
-
+  const winPercentage: number =
+    dataFiltered[dataFiltered.length - 1].winPercentage;
 
   return (
     <div className="rival-container">
-              <div className="numbers-containers">
-      <Paper className={classes.chart}>
-        <TotalWinsRivalsChart  data = {dataFiltered} />
-      </Paper>
-      <Paper className={classes.root}>
-      <h2> {dataFiltered.length} </h2>
-            <p style={textStyle}> Games Vs Pazuzu4 </p>
-      </Paper>
-      <Paper className={classes.root}>
-      <h2> {`${Math.round(winPercentage)}%`} </h2>
-            <p style={textStyle}> Win Percentage </p>
-      </Paper>
+      <div className="numbers-containers">
+        <Paper className={classes.chart}>
+          <TotalWinsRivalsChart data={dataFiltered[dataFiltered.length - 1]} />
+        </Paper>
+        <Paper className={classes.root}>
+          <h2> {dataFiltered.length} </h2>
+          <p style={textStyle}> Games vs Pazuzu4 </p>
+        </Paper>
+        <Paper className={classes.root}>
+          <h2> {`${Math.round(winPercentage)}%`} </h2>
+          <p style={textStyle}> Win Percentage </p>
+        </Paper>
       </div>
       <RivalTrend data={dataFiltered as []} />
     </div>

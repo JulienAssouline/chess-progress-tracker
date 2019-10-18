@@ -5,9 +5,9 @@ import { extent, max, min } from "d3-array";
 import { stack, area } from "d3-shape";
 import { AxisBottom } from "./Bottom";
 import { RivalAxisLeft } from "./RivalAxisLeft";
-import { RivalTrendProps } from "./interfaces/RivalTrend.interface";
+import { RivalProps } from "./interfaces/RivalTrend.interface";
 
-const RivalTrend: React.FC<RivalTrendProps> = ({ data }) => {
+const RivalTrend: React.FC<RivalProps> = ({ data }) => {
   if (data.length === 0) return <div> ...loading</div>;
 
   const keys: string[] = ["winPercentage", "lossPercentage", "drawsPercentage"];
@@ -34,8 +34,6 @@ const RivalTrend: React.FC<RivalTrendProps> = ({ data }) => {
   const yScale = scaleLinear()
     .domain([minValue as number, maxPercent as number])
     .range([height, 0]);
-
-  console.log(series);
 
   const areas = area()
     .x((d: any) => xScale(d.data.date))
