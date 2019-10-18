@@ -7,7 +7,7 @@ import {
   ListItem,
   ListItemText
 } from "@material-ui/core";
-import { RouteComponentProps, withRouter } from "react-router-dom"
+import { RouteComponentProps, withRouter } from "react-router-dom";
 
 const drawerWidth = 100;
 
@@ -33,36 +33,29 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-  interface DetailProps extends RouteComponentProps<{push: any}> {
+interface DetailProps extends RouteComponentProps<{ push: any }> {}
 
-  }
+const navText: string[] = ["Home", "vs Pazuzu", "Monthly", "Summary"];
 
-const navText: string[] = ["Home", "vs Pazuzu", "Monthly", "Summary"]
-
-const SideNav: React.FC<DetailProps> = (props) => {
+const SideNav: React.FC<DetailProps> = props => {
   const classes = useStyles();
 
   function handleClick(e: any) {
     if (e.target.childNodes[0].childNodes[0]) {
       if (e.target.childNodes[0].childNodes[0].innerHTML === "vs Pazuzu") {
-        props.history.push("/rival")
+        props.history.push("/rival");
+      } else if (e.target.childNodes[0].childNodes[0].innerHTML === "Monthly") {
+        props.history.push("/monthly");
+      } else if (e.target.childNodes[0].childNodes[0].innerHTML === "Summary") {
+        props.history.push("/summary");
       }
-      else if (e.target.childNodes[0].childNodes[0].innerHTML === "Monthly") {
-        props.history.push("/monthly")
-      }
-      else if (e.target.childNodes[0].childNodes[0].innerHTML === "Summary") {
-        props.history.push("/summary")
-      }
-    }
-    else {
+    } else {
       if (e.target.innerHTML === "vs Pazuzu") {
-        props.history.push("/rival")
-      }
-      else if (e.target.innerHTML === "Monthly") {
-        props.history.push("/monthly")
-      }
-      else if (e.target.innerHTML === "Summary") {
-        props.history.push("/summary")
+        props.history.push("/rival");
+      } else if (e.target.innerHTML === "Monthly") {
+        props.history.push("/monthly");
+      } else if (e.target.innerHTML === "Summary") {
+        props.history.push("/summary");
       }
     }
   }
@@ -81,11 +74,15 @@ const SideNav: React.FC<DetailProps> = (props) => {
         {navText.map((text: string, index) => (
           <div key={text}>
             {text === "Home" ? (
-              <ListItem onClick = {() => props.history.push("/")} className={classes.listItem} button>
+              <ListItem
+                onClick={() => props.history.push("/")}
+                className={classes.listItem}
+                button
+              >
                 <ListItemText primary={text} />
               </ListItem>
             ) : (
-              <ListItem onClick = {handleClick} button key={text}>
+              <ListItem onClick={handleClick} button key={text}>
                 <ListItemText secondary={text} />
               </ListItem>
             )}

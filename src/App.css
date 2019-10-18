@@ -20,6 +20,7 @@ body {
   flex-flow: row;
   justify-content: space-evenly;
   padding-bottom: 10px;
+  align-items: flex-start;
 }
 
 .data-containe {
@@ -31,4 +32,11 @@ body {
   display: flex;
   flex-flow: row;
   margin-left: 40px;
+}
+
+.box-container {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-evenly;
+  padding-bottom: 10px;
 }
