@@ -72,6 +72,9 @@ const Rival: React.FC = () => {
 
   const winPercentage: number =
     dataFiltered[dataFiltered.length - 1].winPercentage;
+  
+    const totalWins: number =
+    dataFiltered[dataFiltered.length - 1].JulienWins;
 
   return (
     <div className="rival-container">
@@ -86,6 +89,10 @@ const Rival: React.FC = () => {
         <Paper className={classes.root}>
           <h2> {`${Math.round(winPercentage)}%`} </h2>
           <p style={textStyle}> Win Percentage </p>
+        </Paper>
+        <Paper className={classes.root}>
+          <h2> {totalWins} </h2>
+          <p style={textStyle}> Total Wins </p>
         </Paper>
       </div>
       <RivalTrend data={dataFiltered as []} />
