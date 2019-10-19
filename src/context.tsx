@@ -4,8 +4,33 @@ import { timeParse } from "d3-time-format";
 
 export const DataContext = createContext([{}]);
 
+interface Data {
+  data: {
+    black: {
+      rating: number;
+      username: string;
+    };
+    JulienWins: number;
+    JulienDraws: number;
+    JulienLoss: number;
+    winPercentage: number;
+    lossPercentage: number;
+    drawsPercentage: number;
+    pgn: string;
+    end_time: number;
+    fen: string;
+    time_control: string;
+    time_class: string;
+    white: {
+      rating: number;
+      username: string;
+    };
+    date: Date;
+  }[];
+}
+
 export const DataProvider = (props: any) => {
-  const [data, setData] = useState<object[] | undefined>([]);
+  const [data, setData] = useState<Data[] | undefined>([]);
   const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
@@ -28,11 +53,11 @@ export const DataProvider = (props: any) => {
             (d: { data: { games: [] } }) => d.data.games
           );
 
-          results = results.flat();
+          let resultsFlatten = results.flat();
 
           const parseTime = timeParse("%Y.%m.%d %H:%M:%S");
 
-          results.forEach((d: any) => {
+          resultsFlatten.forEach((d: any) => {
             d.date = parseTime(
               `${d.pgn
                 .split("\n")[2]
@@ -44,7 +69,13 @@ export const DataProvider = (props: any) => {
             ) as Date;
           });
 
-          setData(results);
+          const dateMinFilter = new Date(2019, 0, 1);
+
+          resultsFlatten = resultsFlatten.filter((d: { date: Date }) => {
+            return d.date >= dateMinFilter;
+          });
+
+          setData(resultsFlatten);
         }
       } catch (error) {
         setError(true);

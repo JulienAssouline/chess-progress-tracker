@@ -9,8 +9,7 @@ import { Props, LineType } from "./interfaces/RatingTrend.interface";
 
 const RatingTrend: React.FC<Props> = ({ data }) => {
 
-  const dateMax = max(data, d => d.date);
-  const dateMin = new Date(2019, 0, 1);
+  const [dateMin, dateMax] = extent(data, d => d.date)
   const [ratingMin, ratingMax] = extent(data, d =>
     d.black.username === "JulienAssouline" ? d.black.rating : d.white.rating
   );
@@ -22,10 +21,6 @@ const RatingTrend: React.FC<Props> = ({ data }) => {
   const yScale = scaleLinear()
     .domain([ratingMin as number, ratingMax as number])
     .range([height, 0]);
-
-  const dataFiltered = data.filter((d: { date: Date }) => {
-    return d.date >= dateMin;
-  });
 
   const path = line<LineType>()
     .x(d => xScale(d.date))
@@ -48,7 +43,7 @@ const RatingTrend: React.FC<Props> = ({ data }) => {
           />
           <AxisLeft width={width} yScale={yScale} />
           <path
-            d={path(dataFiltered) as string}
+            d={path(data) as string}
             style={{ fill: "none", stroke: "#6b75c4", strokeWidth: 3 }}
           />
         </g>

@@ -1,10 +1,8 @@
 import React from "react";
 import { RivalTotals } from "./interfaces/RivalTrend.interface";
 import { scaleLinear, scaleBand } from "d3-scale";
-import { extent, max, min } from "d3-array";
 import { RivalAxisLeftTotal } from "./RivalAxisLeftTotal";
 import {RivalAxisBottomTotals} from "./RivalAxisBottomTotals"
-import { fontSize } from "@material-ui/system";
 
 const TotalWinsRivalsChart: React.FC<RivalTotals> = ({ data }) => {
   let w: number = 200,

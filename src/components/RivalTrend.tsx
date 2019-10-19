@@ -14,15 +14,9 @@ const RivalTrend: React.FC<RivalProps> = ({ data }) => {
 
   const stacks = stack().keys(keys);
 
-  const dateMinFilter = new Date(2019, 0, 1);
+  const [dateMin, dateMax] = extent(data, d => d.date);
 
-  const dataFiltered = data.filter((d: { date: Date }) => {
-    return d.date >= dateMinFilter;
-  });
-
-  const [dateMin, dateMax] = extent(dataFiltered, d => d.date);
-
-  const series = stacks(dataFiltered as []);
+  const series = stacks(data as []);
 
   const minValue = min(series, series => min(series, d => d[0]));
   const maxPercent = max(series, series => max(series, d => d[1]));

@@ -15,7 +15,7 @@ export const AxisBottom: React.FC<Props> = ({ xScale, height, tickFormat }) =>
         transform={`translate(${xScale(tickValue)},5)`}
       >
         <text style={{ textAnchor: "middle", fontSize: 12 }} dy=".71em" y={height + 3}>
-          {`${tickFormat[tickValue.getMonth()]} ${tickValue.getDate()}`}
+          {`${tickFormat[tickValue.getMonth()]} '${tickValue.getFullYear() - 2000}`}
         </text>
       </g>
     );
