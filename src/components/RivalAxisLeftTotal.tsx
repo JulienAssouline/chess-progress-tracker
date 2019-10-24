@@ -20,16 +20,4 @@ export const RivalAxisLeftTotal: React.FC<Props> = ({ yScale }) =>
     </g>
   ));
 
-// export const RivalAxisLeftTotal: React.FC<Props> = ({ yScale, width }) =>
-//   yScale.ticks(5).map((tickValue: string) => (
-//     <g key={tickValue} className="tick">
-//       <text
-//         style={{ textAnchor: "end", fontSize: 12 }}
-//         x={-3}
-//         dy=".32em"
-//         y={yScale(tickValue)}
-//       >
-//         {tickValue}
-//       </text>
-//     </g>
-//   ));
+

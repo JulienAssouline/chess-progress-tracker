@@ -1,7 +1,7 @@
 import React from "react";
 import { w, h, width, height, margin, xtickFormat } from "../utils/chart_utils";
 import { scaleLinear, scaleTime } from "d3-scale";
-import { extent, max } from "d3-array";
+import { extent } from "d3-array";
 import { line, curveMonotoneX } from "d3-shape";
 import { AxisBottom } from "./Bottom";
 import { AxisLeft } from "./AxisLeft";
