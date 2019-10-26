@@ -40,7 +40,7 @@ const TotalWinsRivalsChart: React.FC<RivalTotals> = ({ data }) => {
       <p style={{ fontWeight: "bold" }}> vs Pasusu4 Totals</p>
       <svg width={w} height={h}>
         <g transform={`translate(${margin.left},${margin.top})`}>
-          <RivalAxisLeftTotal width={width} yScale={yScale} />
+          <RivalAxisLeftTotal width={width} yScale={yScale} textColor = {"white"} />
         <RivalAxisBottomTotals 
             xScale={xScale}
             height={height}/>

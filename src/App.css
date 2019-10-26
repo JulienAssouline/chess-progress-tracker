@@ -40,3 +40,8 @@ body {
   justify-content: space-evenly;
   padding-bottom: 10px;
 }
+
+.header-charts {
+  display: flex;
+  flex-flow: row;
+}

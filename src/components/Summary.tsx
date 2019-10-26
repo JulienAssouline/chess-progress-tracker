@@ -3,8 +3,11 @@ import { DataContext } from "../context";
 import { nest } from "d3-collection";
 import { scaleLinear, scaleTime, scaleBand } from "d3-scale";
 import { extent, max } from "d3-array";
-import { w, h, width, height, margin, xtickFormat } from "../utils/chart_utils";
+import { xtickFormat } from "../utils/chart_utils";
 import { MonthCountBottomAxis } from "./MonthCountBottomAxis";
+import MonthlyCountBarChart from "./MonthlyCountBarChart"
+import GameResultTypeChart from "./GameResultTypeChart"
+
 interface SummaryData {
   date: Date;
   black: {
@@ -22,6 +25,26 @@ interface SummaryData {
 const Summary: React.FC = () => {
   const data = useContext(DataContext) as SummaryData[];
 
+  let w: number = 600,
+    h: number = 200;
+
+  interface Dir {
+    right: number;
+    left: number;
+    top: number;
+    bottom: number;
+  }
+
+  let margin = {
+    right: 40,
+    left: 110,
+    top: 20,
+    bottom: 40
+  } as Dir;
+
+  let width: number = w - margin.right - margin.left,
+    height: number = h - margin.top - margin.bottom;
+
   const countGameResultType = nest<SummaryData, number>()
     .key(d =>
       d.black.username === "JulienAssouline" ? d.black.result : d.white.result
@@ -34,52 +57,12 @@ const Summary: React.FC = () => {
     .rollup(v => v.length)
     .entries(data);
 
-  console.log(gamesPlayedByMonth);
-
-  const monthsCountMax = max(gamesPlayedByMonth, d => d.value);
-
-  const xScale = scaleBand()
-    .domain(xtickFormat)
-    .range([0, width]);
-
-  const yScale = scaleLinear()
-    .domain([0, monthsCountMax as number])
-    .range([height, 0]);
-
-  const monthsRects = gamesPlayedByMonth.map((d, i) => (
-    <rect
-      key={"rect" + i}
-      x={xScale(d.key)}
-      y={yScale(d.value as number)}
-      height={height - yScale(d.value as number)}
-      width={xScale.bandwidth() - 3}
-      style={{ fill: "#6b75c4", stroke: "#6b75c4" }}
-    />
-  ));
-
-  const MonthCountLabels = gamesPlayedByMonth.map((d, i) => (
-    <text
-      key={"text" + i}
-      x={(xScale(d.key) as number) + (xScale.bandwidth() - 3) / 2}
-      y={yScale(d.value as number) + 20}
-      style={{ fill: "white" }}
-      textAnchor="middle"
-    >
-      {" "}
-      {d.value}{" "}
-    </text>
-  ));
-
   return (
     <div className="summary-container">
-      <h1> Summary </h1>
-      <svg width={w} height={h}>
-        <g transform={`translate(${margin.left},${margin.top})`}>
-          <MonthCountBottomAxis xScale={xScale} height={height} />
-          {monthsRects}
-          {MonthCountLabels}
-        </g>
-      </svg>
+      <div className = "header-charts">
+      <MonthlyCountBarChart data = {gamesPlayedByMonth} width = {width} height = {height} margin = {margin} w = {w} h = {h} />
+      <GameResultTypeChart data = {countGameResultType} width = {width} height = {height} margin = {margin} w = {400} h = {400} />
+      </div>
     </div>
   );
 };

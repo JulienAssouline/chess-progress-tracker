@@ -67,6 +67,17 @@ export const DataProvider = (props: any) => {
                 .replace('[EndTime "', "")
                 .replace('"]', "")}`
             ) as Date;
+
+            d.whitElo = Number(
+              d.pgn.split("\n")[13]
+              .replace('[WhiteElo "', "")
+              .replace('"]', "")) as number
+
+            d.blackElo = Number(
+              d.pgn.split("\n")[14]
+              .replace('[BlackElo "', "")
+              .replace('"]', "")) as number 
+
           });
 
           const dateMinFilter = new Date(2019, 0, 1);
