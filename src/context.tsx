@@ -68,15 +68,6 @@ export const DataProvider = (props: any) => {
                 .replace('"]', "")}`
             ) as Date;
 
-            d.whitElo = Number(
-              d.pgn.split("\n")[13]
-              .replace('[WhiteElo "', "")
-              .replace('"]', "")) as number
-
-            d.blackElo = Number(
-              d.pgn.split("\n")[14]
-              .replace('[BlackElo "', "")
-              .replace('"]', "")) as number 
 
           });
 

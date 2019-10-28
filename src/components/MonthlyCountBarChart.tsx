@@ -4,24 +4,30 @@ import { max } from "d3-array";
 import { xtickFormat } from "../utils/chart_utils";
 import { MonthCountBottomAxis } from "./MonthCountBottomAxis";
 interface Props {
-    data: {
-        key: string,
-        value: number | undefined
-    }[],
-    height: number,
-    width: number,
-    margin: {
-        left: number,
-        right: number,
-        top: number,
-        bottom: number
-    },
-    w: number,
-    h: number
+  data: {
+    key: string;
+    value: number | undefined;
+  }[];
+  height: number;
+  width: number;
+  margin: {
+    left: number;
+    right: number;
+    top: number;
+    bottom: number;
+  };
+  w: number;
+  h: number;
 }
 
-const MonthlyCountBarChart: React.FC<Props>= ({data, width, height, margin, w, h}) => {
-
+const MonthlyCountBarChart: React.FC<Props> = ({
+  data,
+  width,
+  height,
+  margin,
+  w,
+  h
+}) => {
   const monthsCountMax = max(data, d => d.value);
 
   const xScale = scaleBand()
@@ -42,7 +48,6 @@ const MonthlyCountBarChart: React.FC<Props>= ({data, width, height, margin, w, h
       style={{ fill: "#6b75c4", stroke: "#6b75c4" }}
     />
   ));
-  
 
   const MonthCountLabels = data.map((d, i) => (
     <text
@@ -57,7 +62,8 @@ const MonthlyCountBarChart: React.FC<Props>= ({data, width, height, margin, w, h
   ));
 
   return (
-    <div className="cummary-chart-container">
+    <div className="summary-chart-container">
+      <p style={{ fontWeight: "bold" }}> Games by Month </p>
       <svg width={w} height={h}>
         <g transform={`translate(${margin.left},${margin.top})`}>
           <MonthCountBottomAxis xScale={xScale} height={height} />

@@ -45,3 +45,8 @@ body {
   display: flex;
   flex-flow: row;
 }
+
+.result-charts {
+  display: flex;
+  flex-flow: row;
+}

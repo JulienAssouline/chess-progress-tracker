@@ -15,6 +15,8 @@ export interface Props {
         username: string;
       };
       date: Date;
+      whitElo: number;
+      blackElo: number;
     }[];
   }
 
@@ -27,5 +29,7 @@ export interface Props {
     white: {
       rating: number;
     };
+    whitElo: number;
+    blackElo: number;
   };
   

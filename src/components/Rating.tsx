@@ -76,7 +76,7 @@ const Rating: React.FC = () => {
           </Paper>
           <Paper className={classes.root}>
             <h2>{stats.chess_blitz.best.rating}</h2>
-            <p style={textStyle}> Best Win </p>
+            <p style={textStyle}> Best Rating </p>
           </Paper>
         </div>
         <RatingTrend data={data as []} />
