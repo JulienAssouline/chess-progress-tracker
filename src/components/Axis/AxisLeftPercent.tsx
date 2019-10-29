@@ -5,7 +5,7 @@ interface Props {
   width: number;
 }
 
-export const RivalAxisLeft: React.FC<Props> = ({ yScale, width }) =>
+export const AxisLeftPercent: React.FC<Props> = ({ yScale, width }) =>
   yScale.ticks(5).map((tickValue: number) => (
     <g key={tickValue} className="tick">
       <line

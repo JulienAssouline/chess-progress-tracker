@@ -1,10 +1,10 @@
 import React from "react";
-import Rating from "./components/Rating";
-import Rival from "./components/Rival";
-import Monthly from "./components/Monthly"
-import Summary from "./components/Summary"
+import Rating from "./components/Rating/RatingConatiner";
+import Rival from "./components/Rival/RivalContainer";
+import Monthly from "./components/Monthly/MonthlyTrends"
+import Summary from "./components/Summary/SummaryContainer"
 import { DataProvider } from "./context";
-import SideNav from "./components/SideNav";
+import SideNav from "./components/Nav/SideNav";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import "./App.css";

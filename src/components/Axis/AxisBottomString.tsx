@@ -5,7 +5,7 @@ interface Props {
   xScale: any;
 }
 
-export const MonthCountBottomAxis: React.FC<Props> = ({
+export const AxisBottomString: React.FC<Props> = ({
   xScale,
   height,
 }) =>

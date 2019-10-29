@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { DataContext } from "../context";
+import { DataContext } from "../../context";
 import { nest } from "d3-collection";
-import { xtickFormat } from "../utils/chart_utils";
+import { xtickFormat } from "../../utils/chart_utils";
 import MonthlyCountBarChart from "./MonthlyCountBarChart";
 import GameResultTypeChart from "./GameResultTypeChart";
 import ResultChart from "./ResultChart";

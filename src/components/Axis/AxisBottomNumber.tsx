@@ -5,7 +5,7 @@ interface Props {
   xScale: any;
 }
 
-export const RivalAxisBottomTotals: React.FC<Props> = ({ xScale, height}) =>
+export const AxisBottomNumber: React.FC<Props> = ({ xScale, height}) =>
   xScale.ticks(3).map((tickValue: number, i: number) => {
     return (
       <g

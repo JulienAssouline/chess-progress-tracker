@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import RatingTrend from "./RatingTrend";
-import { DataContext } from "../context";
-import { Stats, Result } from "./interfaces/Rating.interfaces";
+import { DataContext } from "../../context";
+import { Stats, Result } from "../interfaces/Rating.interfaces";
 import { Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 

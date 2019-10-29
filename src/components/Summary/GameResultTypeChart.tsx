@@ -1,7 +1,7 @@
 import React from "react";
 import { scaleLinear, scaleBand } from "d3-scale";
 import { max } from "d3-array";
-import { RivalAxisLeftTotal } from "./RivalAxisLeftTotal";
+import { AxisLeftString } from "../Axis/AxisLeftString";
 interface Props {
   data: {
     key: string;
@@ -57,7 +57,7 @@ const GameResultTypeChart: React.FC<Props> = ({
       <p style={{ fontWeight: "bold" }}> Result Type </p>
       <svg width={w} height={h}>
         <g transform={`translate(${margin.left},${margin.top})`}>
-          <RivalAxisLeftTotal
+          <AxisLeftString
             yScale={yScale}
             width={width}
             textColor={"black"}

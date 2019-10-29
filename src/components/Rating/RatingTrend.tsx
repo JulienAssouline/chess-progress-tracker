@@ -1,11 +1,11 @@
 import React from "react";
-import { w, h, width, height, margin, xtickFormat } from "../utils/chart_utils";
+import { w, h, width, height, margin, xtickFormat } from "../../utils/chart_utils";
 import { scaleLinear, scaleTime } from "d3-scale";
 import { extent } from "d3-array";
 import { line, curveMonotoneX } from "d3-shape";
-import { AxisBottom } from "./Bottom";
-import { AxisLeft } from "./AxisLeft";
-import { Props, LineType } from "./interfaces/RatingTrend.interface";
+import { AxisBottomMonthYears } from "../Axis/AxisBottomMonthYears";
+import { AxisLeft } from "../Axis/AxisLeft";
+import { Props, LineType } from "../interfaces/RatingTrend.interface";
 
 const RatingTrend: React.FC<Props> = ({ data }) => {
 
@@ -36,7 +36,7 @@ const RatingTrend: React.FC<Props> = ({ data }) => {
       <h2 className="trend-title"> Chess.com rating over time </h2>
       <svg width={w} height={h}>
         <g transform={`translate(${margin.left},${margin.top})`}>
-          <AxisBottom
+          <AxisBottomMonthYears
             xScale={xScale}
             height={height}
             tickFormat={xtickFormat}

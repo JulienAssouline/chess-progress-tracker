@@ -1,11 +1,11 @@
 import React from "react";
-import { w, h, width, height, margin, xtickFormat } from "../utils/chart_utils";
+import { w, h, width, height, margin, xtickFormat } from "../../utils/chart_utils";
 import { scaleLinear, scaleTime, scaleOrdinal } from "d3-scale";
 import { extent, max, min } from "d3-array";
 import { stack, area } from "d3-shape";
-import { AxisBottom } from "./Bottom";
-import { RivalAxisLeft } from "./RivalAxisLeft";
-import { RivalProps } from "./interfaces/RivalTrend.interface";
+import { AxisBottomMonthYears } from "../Axis/AxisBottomMonthYears";
+import { AxisLeftPercent } from "../Axis/AxisLeftPercent";
+import { RivalProps } from "../interfaces/RivalTrend.interface";
 
 const RivalTrend: React.FC<RivalProps> = ({ data }) => {
   if (data.length === 0) return <div> ...loading</div>;
@@ -46,12 +46,12 @@ const RivalTrend: React.FC<RivalProps> = ({ data }) => {
       <h2 className="trend-title"> Win Percentage vs Pazuzu4 </h2>
       <svg width={w} height={h}>
         <g transform={`translate(${margin.left},${margin.top})`}>
-          <AxisBottom
+          <AxisBottomMonthYears
             xScale={xScale}
             height={height}
             tickFormat={xtickFormat}
           />
-          <RivalAxisLeft width={width} yScale={yScale} />
+          <AxisLeftPercent width={width} yScale={yScale} />
           {paths}
         </g>
       </svg>

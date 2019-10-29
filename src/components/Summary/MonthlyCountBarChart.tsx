@@ -1,8 +1,8 @@
 import React from "react";
 import { scaleLinear, scaleBand } from "d3-scale";
 import { max } from "d3-array";
-import { xtickFormat } from "../utils/chart_utils";
-import { MonthCountBottomAxis } from "./MonthCountBottomAxis";
+import { xtickFormat } from "../../utils/chart_utils";
+import { AxisBottomString } from "../Axis/AxisBottomString";
 interface Props {
   data: {
     key: string;
@@ -66,7 +66,7 @@ const MonthlyCountBarChart: React.FC<Props> = ({
       <p style={{ fontWeight: "bold" }}> Games by Month </p>
       <svg width={w} height={h}>
         <g transform={`translate(${margin.left},${margin.top})`}>
-          <MonthCountBottomAxis xScale={xScale} height={height} />
+          <AxisBottomString xScale={xScale} height={height} />
           {rects}
           {MonthCountLabels}
         </g>

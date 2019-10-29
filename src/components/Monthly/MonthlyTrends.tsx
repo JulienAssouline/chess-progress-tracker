@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
-import { DataContext } from "../context";
+import { DataContext } from "../../context";
 import { nest } from "d3-collection";
-import { xtickFormat } from "../utils/chart_utils";
+import { xtickFormat } from "../../utils/chart_utils";
 import { scaleLinear, scaleTime } from "d3-scale";
 import { extent } from "d3-array";
 import { line, curveMonotoneX } from "d3-shape";
-import { MonthlyBottomAxis } from "./MonthlyBottomAxis";
-import { AxisLeft } from "./AxisLeft";
-import { LineType } from "./interfaces/RatingTrend.interface";
+import { AxisBottomMonth } from "../Axis/AxisBottomMonth";
+import { AxisLeft } from "../Axis/AxisLeft";
+import { LineType } from "../interfaces/RatingTrend.interface";
 
 interface MonthlyData {
   date: Date;
@@ -78,7 +78,7 @@ const Monthly: React.FC = () => {
     <svg key={index} width={w} height={h}>
       <g transform={`translate(${margin.left},${margin.top})`}>
         <text x={width / 2}> {months.key} </text>
-        <MonthlyBottomAxis
+        <AxisBottomMonth
           xScale={xScale}
           height={height}
           tickFormat={xtickFormat}

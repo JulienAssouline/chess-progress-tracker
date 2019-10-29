@@ -6,7 +6,7 @@ interface Props {
   xScale: any;
 }
 
-export const AxisBottom: React.FC<Props> = ({ xScale, height, tickFormat }) =>
+export const AxisBottomMonthYears: React.FC<Props> = ({ xScale, height, tickFormat }) =>
   xScale.ticks().map((tickValue: Date, i: number) => {
     return (
       <g

@@ -1,8 +1,8 @@
 import React from "react";
-import { RivalTotals } from "./interfaces/RivalTrend.interface";
+import { RivalTotals } from "../interfaces/RivalTrend.interface";
 import { scaleLinear, scaleBand } from "d3-scale";
-import { RivalAxisLeftTotal } from "./RivalAxisLeftTotal";
-import {RivalAxisBottomTotals} from "./RivalAxisBottomTotals"
+import { AxisLeftString } from "../Axis/AxisLeftString";
+import {AxisBottomNumber} from "../Axis/AxisBottomNumber"
 
 const TotalWinsRivalsChart: React.FC<RivalTotals> = ({ data }) => {
   let w: number = 200,
@@ -40,8 +40,8 @@ const TotalWinsRivalsChart: React.FC<RivalTotals> = ({ data }) => {
       <p style={{ fontWeight: "bold" }}> vs Pasusu4 Totals</p>
       <svg width={w} height={h}>
         <g transform={`translate(${margin.left},${margin.top})`}>
-          <RivalAxisLeftTotal width={width} yScale={yScale} textColor = {"white"} />
-        <RivalAxisBottomTotals 
+          <AxisLeftString width={width} yScale={yScale} textColor = {"white"} />
+        <AxisBottomNumber 
             xScale={xScale}
             height={height}/>
           <rect

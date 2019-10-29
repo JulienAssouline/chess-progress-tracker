@@ -6,7 +6,7 @@ interface Props {
   textColor: string
 }
 
-export const RivalAxisLeftTotal: React.FC<Props> = ({ yScale, textColor }) =>
+export const AxisLeftString: React.FC<Props> = ({ yScale, textColor }) =>
   yScale.domain().map((tickValue: string) => (
     <g key = {tickValue} className="tick">
       <text
