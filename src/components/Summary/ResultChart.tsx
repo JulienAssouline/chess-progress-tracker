@@ -7,20 +7,10 @@ interface Props {
   gamesWon: number;
   gamesDrawn: number;
   gamesLost: number;
-  width: number;
-  height: number;
-  w: number;
-  h: number;
-  margin: {
-    left: number;
-    right: number;
-    bottom: number;
-    top: number;
-  };
 }
 
 const ResultChart: React.FC<Props> = ({ gamesWon, gamesDrawn, gamesLost }) => {
-  let w: number = 600,
+  let w: number = 400,
     h: number = 200;
 
   interface Dir {

@@ -5,6 +5,7 @@ import { xtickFormat } from "../../utils/chart_utils";
 import MonthlyCountBarChart from "./MonthlyCountBarChart";
 import GameResultTypeChart from "./GameResultTypeChart";
 import ResultChart from "./ResultChart";
+import OpponentRatingTrend from "./OpponentRatingTrend"
 
 interface SummaryData {
   date: Date;
@@ -22,6 +23,8 @@ interface SummaryData {
 
 const Summary: React.FC = () => {
   const data = useContext(DataContext) as SummaryData[];
+
+  if (data.length === 0) return <div>...loading</div>;
 
   let w: number = 600,
     h: number = 200;
@@ -68,7 +71,6 @@ const Summary: React.FC = () => {
       ? d.black.result === "win"
       : d.white.result === "win"
   );
-
   return (
     <div className="summary-container">
       <div className="header-charts">
@@ -94,11 +96,9 @@ const Summary: React.FC = () => {
           gamesWon={gamesWon.length}
           gamesDrawn={gamesDrawn.length}
           gamesLost={gamesLost.length}
-          width={width}
-          height={height}
-          margin={margin}
-          w={400}
-          h={400}
+        />
+        <OpponentRatingTrend 
+          data = {data as []}
         />
       </div>
     </div>
