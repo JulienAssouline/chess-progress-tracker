@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Theme, makeStyles } from "@material-ui/core/styles";
 import {
   Drawer,
@@ -36,11 +36,16 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface DetailProps extends RouteComponentProps<{ push: any }> {}
 
 interface NavData {
-    header: string,
-    pathname: string
+  header: string;
+  pathname: string;
 }
 
-const navText: NavData[] = [{header: "Home", pathname: "/"}, {header: "vs Pazuzu", pathname: "/rival"}, {header: "Monthly", pathname: "/monthly"}, {header: "Summary", pathname: "/summary"}]
+const navText: NavData[] = [
+  { header: "Home", pathname: "/" },
+  { header: "vs Pazuzu", pathname: "/rival" },
+  { header: "Monthly", pathname: "/monthly" },
+  { header: "Summary", pathname: "/summary" }
+];
 
 const SideNav: React.FC<DetailProps> = props => {
   const classes = useStyles();
@@ -48,13 +53,14 @@ const SideNav: React.FC<DetailProps> = props => {
   // TODO: Find a better solution and clean up code!!
 
   function handleClick(e: any) {
-    console.log(e.target.childNodes[0].childNodes[0])
+    console.log(e.target.childNodes[0].childNodes[0]);
 
     if (e.target.childNodes[0].childNodes[0]) {
       if (e.target.childNodes[0].childNodes[0].innerHTML === "Home") {
         props.history.push("/");
-      }
-     else if (e.target.childNodes[0].childNodes[0].innerHTML === "vs Pazuzu") {
+      } else if (
+        e.target.childNodes[0].childNodes[0].innerHTML === "vs Pazuzu"
+      ) {
         props.history.push("/rival");
       } else if (e.target.childNodes[0].childNodes[0].innerHTML === "Monthly") {
         props.history.push("/monthly");
@@ -64,16 +70,12 @@ const SideNav: React.FC<DetailProps> = props => {
     } else {
       if (e.target.innerHTML === "Home") {
         props.history.push("/");
-      }
-      else if (e.target.innerHTML === "vs Pazuzu") {
+      } else if (e.target.innerHTML === "vs Pazuzu") {
         props.history.push("/rival");
-
       } else if (e.target.innerHTML === "Monthly") {
         props.history.push("/monthly");
-
       } else if (e.target.innerHTML === "Summary") {
         props.history.push("/summary");
-
       }
     }
   }
