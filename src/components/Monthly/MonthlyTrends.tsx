@@ -7,22 +7,10 @@ import { extent } from "d3-array";
 import { line, curveMonotoneX } from "d3-shape";
 import { AxisBottomMonth } from "../Axis/AxisBottomMonth";
 import { AxisLeft } from "../Axis/AxisLeft";
-import { LineType } from "../interfaces/RatingTrend.interface";
-
-interface MonthlyData {
-  date: Date;
-  black: {
-    rating: number;
-    username: string;
-  };
-  white: {
-    rating: number;
-    username: string;
-  };
-}
+import { IMonthlyData, LineType } from "./monthlyInterface/monthly.interfaces";
 
 const Monthly: React.FC = () => {
-  const data = useContext(DataContext) as MonthlyData[];
+  const data = useContext(DataContext) as IMonthlyData[];
 
   let w: number = 400,
     h: number = 200;

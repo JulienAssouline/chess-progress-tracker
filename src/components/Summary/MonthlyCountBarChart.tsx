@@ -3,24 +3,9 @@ import { scaleLinear, scaleBand } from "d3-scale";
 import { max } from "d3-array";
 import { xtickFormat } from "../../utils/chart_utils";
 import { AxisBottomString } from "../Axis/AxisBottomString";
-interface Props {
-  data: {
-    key: string;
-    value: number | undefined;
-  }[];
-  height: number;
-  width: number;
-  margin: {
-    left: number;
-    right: number;
-    top: number;
-    bottom: number;
-  };
-  w: number;
-  h: number;
-}
+import { IMonthCountProps } from "./summaryInterfaces/summary.interfaces"
 
-const MonthlyCountBarChart: React.FC<Props> = ({
+const MonthlyCountBarChart: React.FC<IMonthCountProps> = ({
   data,
   width,
   height,

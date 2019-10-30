@@ -6,23 +6,10 @@ import MonthlyCountBarChart from "./MonthlyCountBarChart";
 import GameResultTypeChart from "./GameResultTypeChart";
 import ResultChart from "./ResultChart";
 import OpponentRatingTrend from "./OpponentRatingTrend"
-
-interface SummaryData {
-  date: Date;
-  black: {
-    rating: number;
-    username: string;
-    result: string;
-  };
-  white: {
-    rating: number;
-    username: string;
-    result: string;
-  };
-}
+import {ISummaryData} from "./summaryInterfaces/summary.interfaces"
 
 const Summary: React.FC = () => {
-  const data = useContext(DataContext) as SummaryData[];
+  const data = useContext(DataContext) as ISummaryData[];
 
   if (data.length === 0) return <div>...loading</div>;
 
@@ -46,14 +33,14 @@ const Summary: React.FC = () => {
   let width: number = w - margin.right - margin.left,
     height: number = h - margin.top - margin.bottom;
 
-  const countGameResultType = nest<SummaryData, number>()
+  const countGameResultType = nest<ISummaryData, number>()
     .key(d =>
       d.black.username === "JulienAssouline" ? d.black.result : d.white.result
     )
     .rollup(v => v.length)
     .entries(data);
 
-  const gamesPlayedByMonth = nest<SummaryData, number>()
+  const gamesPlayedByMonth = nest<ISummaryData, number>()
     .key(d => xtickFormat[d.date.getMonth()] as string)
     .rollup(v => v.length)
     .entries(data);

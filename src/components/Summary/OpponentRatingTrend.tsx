@@ -7,47 +7,10 @@ import { line, curveMonotoneX } from "d3-shape";
 import { AxisBottomMonthYears } from "../Axis/AxisBottomMonthYears";
 import { AxisLeft } from "../Axis/AxisLeft";
 import { timeFormat, timeParse } from "d3-time-format";
+import {IOpponentRatingProps, IGroupedDate, LineType} from "./summaryInterfaces/summary.interfaces"
 
-interface Props {
-  data: {
-    black: {
-      rating: number;
-      username: string;
-    };
-    pgn: string;
-    end_time: number;
-    fen: string;
-    time_control: string;
-    time_class: string;
-    white: {
-      rating: number;
-      username: string;
-    };
-    date: Date;
-    whitElo: number;
-    blackElo: number;
-    dateParsed: string;
-  }[];
-}
 
-interface Data {
-  black: {
-    rating: number;
-    username: string;
-  };
-  dateParsed: string;
-  white: {
-    rating: number;
-    username: string;
-  };
-}
-
-interface LineType {
-  key: string | Date;
-  value: number;
-}
-
-const OpponentRatingTrend: React.FC<Props> = ({ data }) => {
+const OpponentRatingTrend: React.FC<IOpponentRatingProps> = ({ data }) => {
   let w: number = 600,
     h: number = 200;
 
@@ -75,7 +38,7 @@ const OpponentRatingTrend: React.FC<Props> = ({ data }) => {
     d.dateParsed = formatTime(d.date);
   });
 
-  const AverageOpponentRatingByDay = nest<Data, string | number | undefined>()
+  const AverageOpponentRatingByDay = nest<IGroupedDate, string | number | undefined>()
     .key(d => d.dateParsed as string)
     .rollup(v => {
       return mean(v, d =>

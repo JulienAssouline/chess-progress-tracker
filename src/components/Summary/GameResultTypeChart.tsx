@@ -2,24 +2,9 @@ import React from "react";
 import { scaleLinear, scaleBand } from "d3-scale";
 import { max } from "d3-array";
 import { AxisLeftString } from "../Axis/AxisLeftString";
-interface Props {
-  data: {
-    key: string;
-    value: number | undefined;
-  }[];
-  height: number;
-  width: number;
-  margin: {
-    left: number;
-    right: number;
-    top: number;
-    bottom: number;
-  };
-  w: number;
-  h: number;
-}
+import { IResultTypeProps } from "./summaryInterfaces/summary.interfaces"
 
-const GameResultTypeChart: React.FC<Props> = ({
+const GameResultTypeChart: React.FC<IResultTypeProps> = ({
   data,
   w,
   h,

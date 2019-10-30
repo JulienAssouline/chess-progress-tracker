@@ -5,9 +5,9 @@ import { extent } from "d3-array";
 import { line, curveMonotoneX } from "d3-shape";
 import { AxisBottomMonthYears } from "../Axis/AxisBottomMonthYears";
 import { AxisLeft } from "../Axis/AxisLeft";
-import { Props, LineType } from "../interfaces/RatingTrend.interface";
+import { IRatingTrendProps, ILineType } from "./ratingInterface/rating.interfaces";
 
-const RatingTrend: React.FC<Props> = ({ data }) => {
+const RatingTrend: React.FC<IRatingTrendProps> = ({ data }) => {
 
   const [dateMin, dateMax] = extent(data, d => d.date)
   const [ratingMin, ratingMax] = extent(data, d =>
@@ -22,7 +22,7 @@ const RatingTrend: React.FC<Props> = ({ data }) => {
     .domain([ratingMin as number, ratingMax as number])
     .range([height, 0]);
 
-  const path = line<LineType>()
+  const path = line<ILineType>()
     .x(d => xScale(d.date))
     .y(d =>
       d.black.username === "JulienAssouline"

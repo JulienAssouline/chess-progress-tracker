@@ -1,10 +1,10 @@
 import React from "react";
-import { RivalTotals } from "../interfaces/RivalTrend.interface";
+import { IRivalTotals } from "./rivalInterface/rival.interfaces";
 import { scaleLinear, scaleBand } from "d3-scale";
 import { AxisLeftString } from "../Axis/AxisLeftString";
 import {AxisBottomNumber} from "../Axis/AxisBottomNumber"
 
-const TotalWinsRivalsChart: React.FC<RivalTotals> = ({ data }) => {
+const TotalWinsRivalsChart: React.FC<IRivalTotals> = ({ data }) => {
   let w: number = 200,
     h: number = 100;
 
@@ -24,8 +24,6 @@ const TotalWinsRivalsChart: React.FC<RivalTotals> = ({ data }) => {
 
   let width: number = w - margin.right - margin.left,
     height: number = h - margin.top - margin.bottom;
-
-  console.log(data);
 
   const xScale = scaleLinear()
     .domain([0, data.JulienWins])
@@ -65,8 +63,6 @@ const TotalWinsRivalsChart: React.FC<RivalTotals> = ({ data }) => {
             width={xScale(data.JulienDraws)}
             style={{ fill: "white" }}
           />
-
-
         </g>
       </svg>
     </div>

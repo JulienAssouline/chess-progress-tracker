@@ -2,14 +2,9 @@ import React from "react";
 import { scaleLinear, scaleBand } from "d3-scale";
 import { AxisLeftString } from "../Axis/AxisLeftString";
 import { AxisBottomNumber } from "../Axis/AxisBottomNumber";
+import {IResultChartProps} from "./summaryInterfaces/summary.interfaces"
 
-interface Props {
-  gamesWon: number;
-  gamesDrawn: number;
-  gamesLost: number;
-}
-
-const ResultChart: React.FC<Props> = ({ gamesWon, gamesDrawn, gamesLost }) => {
+const ResultChart: React.FC<IResultChartProps> = ({ gamesWon, gamesDrawn, gamesLost }) => {
   let w: number = 400,
     h: number = 200;
 

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import RatingTrend from "./RatingTrend";
 import { DataContext } from "../../context";
-import { Stats, Result } from "../interfaces/Rating.interfaces";
+import { IStats, IResult } from "./ratingInterface/rating.interfaces";
 import { Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
 const textStyle = { color: "#9597ab", fontSize: 14 };
 
 const Rating: React.FC = () => {
-  const [stats, setStats] = useState<Stats | undefined>(undefined);
+  const [stats, setStats] = useState<IStats | undefined>(undefined);
   const [error, setError] = useState<boolean>(false);
   const data = useContext(DataContext);
   const classes = useStyles();
@@ -42,7 +42,7 @@ const Rating: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result: Result = await axios(
+        const result: IResult = await axios(
           "https://api.chess.com/pub/player/julienassouline/stats"
         );
 
