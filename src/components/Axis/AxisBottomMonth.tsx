@@ -1,12 +1,7 @@
 import React from "react";
+import {IAxisBottomMonthsProps} from "./axisInterface/axis.interface" 
 
-interface Props {
-  height: number;
-  tickFormat: string[];
-  xScale: any;
-}
-
-export const AxisBottomMonth: React.FC<Props> = ({
+export const AxisBottomMonth: React.FC<IAxisBottomMonthsProps> = ({
   xScale,
   height,
   tickFormat

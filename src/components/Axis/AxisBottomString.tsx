@@ -1,11 +1,8 @@
 import React from "react";
+import {IAxisBottomStringProps} from "./axisInterface/axis.interface" 
 
-interface Props {
-  height: number;
-  xScale: any;
-}
 
-export const AxisBottomString: React.FC<Props> = ({
+export const AxisBottomString: React.FC<IAxisBottomStringProps> = ({
   xScale,
   height,
 }) =>

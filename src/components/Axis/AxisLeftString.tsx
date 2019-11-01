@@ -1,12 +1,7 @@
 import React from "react";
+import {IAxisLeftProps} from "./axisInterface/axis.interface"
 
-interface Props {
-  yScale: any;
-  width: number;
-  textColor: string
-}
-
-export const AxisLeftString: React.FC<Props> = ({ yScale, textColor }) =>
+export const AxisLeftString: React.FC<IAxisLeftProps> = ({ yScale, textColor }) =>
   yScale.domain().map((tickValue: string) => (
     <g key = {tickValue} className="tick">
       <text
