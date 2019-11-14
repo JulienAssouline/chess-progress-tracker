@@ -10,6 +10,12 @@ body {
   margin: auto;
 }
 
+.rating-container {
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+}
+
 .trend-title {
   text-align: left;
   padding-top: 20px;
@@ -23,7 +29,7 @@ body {
   align-items: flex-start;
 }
 
-.data-containe {
+.data-container {
   display: flex;
   flex-flow: column;
 }
@@ -49,4 +55,23 @@ body {
 .result-charts {
   display: flex;
   flex-flow: row;
+}
+
+.most-player-container {
+  margin-left: auto;
+}
+
+.player-container {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  padding: 20px;
+  background-color: #f0f4f9;
+  margin: 15px;
+  border-radius: 25px;
+  justify-content: center;
+}
+
+.player-name {
+  padding-right: 10px;
 }

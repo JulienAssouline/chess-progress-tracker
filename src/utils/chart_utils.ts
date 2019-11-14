@@ -1,4 +1,4 @@
-export let w: number = 900,
+export let w: number = 800,
   h: number = 400;
 
   interface Dir {

@@ -66,4 +66,18 @@ export interface IRatingTrendProps {
     whitElo: number;
     blackElo: number;
   };
+
+  export interface ISummaryData {
+    date: Date;
+    black: {
+      rating: number;
+      username: string;
+      result: string;
+    };
+    white: {
+      rating: number;
+      username: string;
+      result: string;
+    };
+  }
   

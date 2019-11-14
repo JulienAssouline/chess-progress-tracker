@@ -53,7 +53,6 @@ const SideNav: React.FC<DetailProps> = props => {
   // TODO: Find a better solution and clean up code!!
 
   function handleClick(e: any) {
-    console.log(e.target.childNodes[0].childNodes[0]);
 
     if (e.target.childNodes[0].childNodes[0]) {
       if (e.target.childNodes[0].childNodes[0].innerHTML === "Home") {

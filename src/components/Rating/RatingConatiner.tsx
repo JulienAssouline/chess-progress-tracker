@@ -2,9 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import RatingTrend from "./RatingTrend";
 import { DataContext } from "../../context";
-import { IStats, IResult } from "./ratingInterface/rating.interfaces";
+import {
+  IStats,
+  IResult,
+  ISummaryData
+} from "./ratingInterface/rating.interfaces";
 import { Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { nest } from "d3-collection";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,6 +32,12 @@ const useStyles = makeStyles(theme => ({
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     textAlign: "left",
+    boxShadow: "none"
+  },
+  top_players: {
+    padding: 10,
+    height: "100%",
+    width: 250,
     boxShadow: "none"
   }
 }));
@@ -56,6 +67,19 @@ const Rating: React.FC = () => {
 
   if (data.length === 0 || !stats) return <div>...loading</div>;
 
+  const OpponentsCount = nest<ISummaryData, number>()
+    .key(d =>
+      d.black.username !== "JulienAssouline"
+        ? d.black.username
+        : (d.white.username as string)
+    )
+    .rollup(v => v.length)
+    .entries(data as []);
+
+  const Top5Opponents = OpponentsCount.sort(
+    (a, b) => (b.value as number) - (a.value as number)
+  ).slice(0, 5);
+
   return (
     <div className="rating-container">
       <div className="data-container">
@@ -80,6 +104,17 @@ const Rating: React.FC = () => {
           </Paper>
         </div>
         <RatingTrend data={data as []} />
+      </div>
+      <div className="most-player-container">
+        <Paper className={classes.top_players}>
+          <h2> Most played players </h2>
+          {Top5Opponents.map(d => (
+            <div key={d.key} className="player-container">
+              <h3 className="player-name">{d.key}:</h3>
+              <p className="player-value">{d.value}</p>
+            </div>
+          ))}
+        </Paper>
       </div>
     </div>
   );
