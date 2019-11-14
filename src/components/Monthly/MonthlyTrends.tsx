@@ -32,8 +32,8 @@ const Monthly: React.FC = () => {
   let width: number = w - margin.right - margin.left,
     height: number = h - margin.top - margin.bottom;
 
-  let nestedData = nest()
-    .key((d: any) => xtickFormat[d.date.getMonth()])
+  let nestedData = nest<IMonthlyData, number>()
+    .key((d) => xtickFormat[d.date.getMonth()])
     .entries(data);
 
   nestedData = nestedData.slice(2);

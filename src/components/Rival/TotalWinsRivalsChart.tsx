@@ -41,7 +41,9 @@ const TotalWinsRivalsChart: React.FC<IRivalTotals> = ({ data }) => {
           <AxisLeftString width={width} yScale={yScale} textColor = {"white"} />
         <AxisBottomNumber 
             xScale={xScale}
-            height={height}/>
+            height={height}
+            textColor = {"white"}
+            />
           <rect
             x={0}
             y={yScale("Win")}

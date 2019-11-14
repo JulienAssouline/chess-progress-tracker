@@ -1,5 +1,12 @@
 import React from "react";
-import { w, h, width, height, margin, xtickFormat } from "../../utils/chart_utils";
+import {
+  w,
+  h,
+  width,
+  height,
+  margin,
+  xtickFormat
+} from "../../utils/chart_utils";
 import { scaleLinear, scaleTime, scaleOrdinal } from "d3-scale";
 import { extent, max, min } from "d3-array";
 import { stack, area } from "d3-shape";
@@ -37,7 +44,7 @@ const RivalTrend: React.FC<IRivalTrendProps> = ({ data }) => {
   const colors = scaleOrdinal(["#6b75c4", "#dfe0e9", "grey"]);
   colors.domain(keys);
 
-  const paths = series.map((d: any, i: number) => (
+  const paths: object[] = series.map((d: any, i: number) => (
     <path key={i} d={areas(d) as string} style={{ fill: colors(d.key) }} />
   ));
 

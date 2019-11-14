@@ -2,6 +2,7 @@ import React from "react";
 import { scaleLinear, scaleBand } from "d3-scale";
 import { max } from "d3-array";
 import { AxisLeftString } from "../Axis/AxisLeftString";
+import { AxisBottomNumber } from "../Axis/AxisBottomNumber";
 import { IResultTypeProps } from "./summaryInterfaces/summary.interfaces"
 
 const GameResultTypeChart: React.FC<IResultTypeProps> = ({
@@ -47,6 +48,7 @@ const GameResultTypeChart: React.FC<IResultTypeProps> = ({
             width={width}
             textColor={"black"}
           />
+          <AxisBottomNumber xScale={xScale} height={height} textColor = {"black"} />
           {rects}
         </g>
       </svg>

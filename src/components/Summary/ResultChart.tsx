@@ -43,7 +43,7 @@ const ResultChart: React.FC<IResultChartProps> = ({ gamesWon, gamesDrawn, gamesL
             yScale={yScale}
             textColor={"black"}
           />
-          <AxisBottomNumber xScale={xScale} height={height} />
+          <AxisBottomNumber xScale={xScale} height={height} textColor = {"black"} />
           <rect
             x={0}
             y={yScale("Win")}

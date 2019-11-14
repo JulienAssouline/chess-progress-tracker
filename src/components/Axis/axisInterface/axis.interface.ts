@@ -7,6 +7,7 @@ export interface IAxisBottomMonthsProps {
   export interface IAxisBottomProps {
     height: number;
     xScale: any;
+    textColor: string;
   }
 
   export interface IAxisBottomStringProps {

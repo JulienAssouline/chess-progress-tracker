@@ -4,6 +4,7 @@ import RivalTrend from "./RivalTrend";
 import { Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import TotalWinsRivalsChart from "./TotalWinsRivalsChart";
+import { IRivalContextData } from "./rivalInterface/rival.interfaces";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,13 +32,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Rival: React.FC = () => {
-  const data = useContext(DataContext);
+  const data = useContext(DataContext) as IRivalContextData[];
   const classes = useStyles();
 
   if (data.length === 0) return <div>...loading</div>;
 
-  const dataFiltered: any = data.filter(
-    (d: any) =>
+  const dataFiltered = data.filter(
+    d =>
       (d.black.username === "JulienAssouline" &&
         d.white.username === "pazuzu4") ||
       (d.white.username === "JulienAssouline" && d.black.username === "pazuzu4")
@@ -47,7 +48,7 @@ const Rival: React.FC = () => {
   let drawCounter: number = 0;
   let lossCounter: number = 0;
 
-  dataFiltered.forEach((d: any, i: number) => {
+  dataFiltered.forEach((d, i: number) => {
     d.JulienWins = winCounter;
     d.JulienDraws = drawCounter;
     d.JulienLoss = lossCounter;
@@ -72,9 +73,8 @@ const Rival: React.FC = () => {
 
   const winPercentage: number =
     dataFiltered[dataFiltered.length - 1].winPercentage;
-  
-    const totalWins: number =
-    dataFiltered[dataFiltered.length - 1].JulienWins;
+
+  const totalWins: number = dataFiltered[dataFiltered.length - 1].JulienWins;
 
   return (
     <div className="rival-container">
