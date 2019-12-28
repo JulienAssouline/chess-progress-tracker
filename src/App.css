@@ -3,6 +3,7 @@ body {
 }
 .App {
   text-align: center;
+  overflow: hidden; /* Hide scrollbars */
 }
 
 .trend-container {
@@ -59,6 +60,7 @@ body {
 
 .most-player-container {
   margin-left: auto;
+  height: 100vh;
 }
 
 .player-container {
@@ -79,8 +81,18 @@ body {
 .rival-container {
   display: flex;
   flex-flow: column;
+  overflow-y: hidden; /* Hide vertical scrollbar */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
 }
 
 .monthly-years-dd-container {
   padding: 20px;
+}
+
+.longest-games-rival-container {
+  position: relative;
+  margin-left: auto;
+  overflow-y: scroll; /* Hide scrollbars */
+  height: 100vh;
+  background-color: white;
 }

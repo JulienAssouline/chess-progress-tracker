@@ -5,6 +5,8 @@ import { Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import TotalWinsRivalsChart from "./TotalWinsRivalsChart";
 import { IRivalContextData } from "./rivalInterface/rival.interfaces";
+import moment from "moment";
+import LongestRivalGames from "./LongestRivalGames";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -48,7 +50,7 @@ const Rival: React.FC = () => {
   let drawCounter: number = 0;
   let lossCounter: number = 0;
 
-  dataFiltered.forEach((d, i: number) => {
+  dataFiltered.forEach(d => {
     d.JulienWins = winCounter;
     d.JulienDraws = drawCounter;
     d.JulienLoss = lossCounter;
@@ -56,6 +58,21 @@ const Rival: React.FC = () => {
     d.winPercentage = (d.JulienWins / d.Total) * 100;
     d.lossPercentage = (d.JulienLoss / d.Total) * 100;
     d.drawsPercentage = (d.JulienDraws / d.Total) * 100;
+    d.startTime = moment(
+      d.pgn
+        .split("\n")[17]
+        .replace('[StartTime "', "")
+        .replace('"]', ""),
+      "HH:mm:ss"
+    );
+    d.endTime = moment(
+      d.pgn
+        .split("\n")[19]
+        .replace('[EndTime "', "")
+        .replace('"]', ""),
+      "HH:mm:ss"
+    );
+    d.timeDifference = moment.duration(d.endTime.diff(d.startTime)).asMinutes();
 
     if (
       (d.black.username === "JulienAssouline" && d.black.result === "win") ||
@@ -75,28 +92,37 @@ const Rival: React.FC = () => {
     dataFiltered[dataFiltered.length - 1].winPercentage;
 
   const totalWins: number = dataFiltered[dataFiltered.length - 1].JulienWins;
-
   return (
-    <div className="rival-container">
-      <div className="numbers-containers">
-        <Paper className={classes.chart}>
-          <TotalWinsRivalsChart data={dataFiltered[dataFiltered.length - 1]} />
-        </Paper>
-        <Paper className={classes.root}>
-          <h2> {dataFiltered.length} </h2>
-          <p style={textStyle}> Games vs Pazuzu4 </p>
-        </Paper>
-        <Paper className={classes.root}>
-          <h2> {`${Math.round(winPercentage)}%`} </h2>
-          <p style={textStyle}> Win Percentage </p>
-        </Paper>
-        <Paper className={classes.root}>
-          <h2> {totalWins} </h2>
-          <p style={textStyle}> Total Wins </p>
-        </Paper>
+    <>
+      <div className="rival-container">
+        <div className="numbers-containers">
+          <Paper className={classes.chart}>
+            <TotalWinsRivalsChart
+              data={dataFiltered[dataFiltered.length - 1]}
+            />
+          </Paper>
+          <Paper className={classes.root}>
+            <h2> {dataFiltered.length} </h2>
+            <p style={textStyle}> Games vs Pazuzu4 </p>
+          </Paper>
+          <Paper className={classes.root}>
+            <h2> {`${Math.round(winPercentage)}%`} </h2>
+            <p style={textStyle}> Win Percentage </p>
+          </Paper>
+          <Paper className={classes.root}>
+            <h2> {totalWins} </h2>
+            <p style={textStyle}> Total Wins </p>
+          </Paper>
+        </div>
+
+        <div className="rival-trend-container">
+          <RivalTrend data={dataFiltered as []} />
+        </div>
       </div>
-      <RivalTrend data={dataFiltered as []} />
-    </div>
+      <div className="longest-games-rival-container">
+        <LongestRivalGames data={dataFiltered as []} />
+      </div>
+    </>
   );
 };
 

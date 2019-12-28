@@ -49,6 +49,9 @@ export interface IRivalTrendProps {
 }
 
 export interface IRivalContextData {
+  endTime: any;
+  startTime: any;
+  timeDifference: number;
   black: {
     rating: number;
     username: string;
