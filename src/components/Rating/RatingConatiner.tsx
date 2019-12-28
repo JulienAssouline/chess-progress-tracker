@@ -66,6 +66,7 @@ const Rating: React.FC = () => {
   }, []);
 
   if (data.length === 0 || !stats) return <div>...loading</div>;
+  if (error) return <div> Oh no there was an error :( </div>;
 
   const OpponentsCount = nest<ISummaryData, number>()
     .key(d =>
