@@ -8,7 +8,7 @@ import { IRivalContextData } from "./rivalInterface/rival.interfaces";
 import LongestRivalGames from "./LongestRivalGames";
 import { calcValues } from "./helper/index";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {
     padding: 15,
     width: 150,
