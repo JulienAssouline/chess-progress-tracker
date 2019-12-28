@@ -1,6 +1,6 @@
 ## A chess dashboard to keep track of my chess.com rating progress.
 
-Written in React and typescript. I also am using context a little and Material UI (a lot).
+Writen in React and typescript. Also using context (a little) and Material UI (a lot).
 
 The goal of this project is to build something fun, while also learning typescript. Some of the types and code could use a bit of cleaning up.
 
