@@ -2,9 +2,13 @@ import React from "react";
 import { scaleLinear, scaleBand } from "d3-scale";
 import { AxisLeftString } from "../Axis/AxisLeftString";
 import { AxisBottomNumber } from "../Axis/AxisBottomNumber";
-import {IResultChartProps} from "./summaryInterfaces/summary.interfaces"
+import { IResultChartProps } from "./summaryInterfaces/summary.interfaces";
 
-const ResultChart: React.FC<IResultChartProps> = ({ gamesWon, gamesDrawn, gamesLost }) => {
+const ResultChart: React.FC<IResultChartProps> = ({
+  gamesWon,
+  gamesDrawn,
+  gamesLost
+}) => {
   let w: number = 400,
     h: number = 200;
 
@@ -38,12 +42,12 @@ const ResultChart: React.FC<IResultChartProps> = ({ gamesWon, gamesDrawn, gamesL
       <p style={{ fontWeight: "bold" }}> Results </p>
       <svg width={w} height={h}>
         <g transform={`translate(${margin.left},${margin.top})`}>
-          <AxisLeftString
-            width={width}
-            yScale={yScale}
+          <AxisLeftString width={width} yScale={yScale} textColor={"black"} />
+          <AxisBottomNumber
+            xScale={xScale}
+            height={height}
             textColor={"black"}
           />
-          <AxisBottomNumber xScale={xScale} height={height} textColor = {"black"} />
           <rect
             x={0}
             y={yScale("Win")}

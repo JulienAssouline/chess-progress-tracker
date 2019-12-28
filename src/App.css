@@ -75,3 +75,12 @@ body {
 .player-name {
   padding-right: 10px;
 }
+
+.rival-container {
+  display: flex;
+  flex-flow: column;
+}
+
+.monthly-years-dd-container {
+  padding: 20px;
+}
