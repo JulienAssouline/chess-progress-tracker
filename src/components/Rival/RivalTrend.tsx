@@ -19,7 +19,7 @@ import {
 
 type PathSeries = Series<
   {
-    [keys: string]: number;
+    [key: string]: number;
   },
   string
 >;
@@ -63,7 +63,7 @@ const RivalTrend: React.FC<IRivalTrendProps> = ({ data }) => {
     <path
       key={i}
       d={areas((d as unknown) as []) as string}
-      style={{ fill: colors((d.keys as unknown) as string) }}
+      style={{ fill: colors(d.key as string) }}
     />
   ));
 
