@@ -1,3 +1,5 @@
+import { Moment } from "moment";
+
 export interface IRivalTotals {
   data: {
     black: {
@@ -49,8 +51,8 @@ export interface IRivalTrendProps {
 }
 
 export interface IRivalContextData {
-  endTime: any;
-  startTime: any;
+  endTime: Moment;
+  startTime: Moment;
   timeDifference: number;
   black: {
     rating: number;
@@ -75,4 +77,10 @@ export interface IRivalContextData {
     result: string;
   };
   date: Date;
+}
+
+export interface IAreaDatum {
+  data: { date: Date };
+  0: number;
+  1: number;
 }

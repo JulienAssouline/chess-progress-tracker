@@ -84,7 +84,7 @@ const Summary: React.FC = () => {
   );
 
   const handleYearChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setYear(Number(event.target.value as string) as any);
+    setYear(Number(event.target.value as string));
   };
 
   return (

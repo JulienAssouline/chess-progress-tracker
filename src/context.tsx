@@ -1,10 +1,10 @@
 import React, { useState, createContext, useEffect } from "react";
-import axios from "axios";
+import axios, { AxiosResponse, AxiosStatic } from "axios";
 import { timeParse } from "d3-time-format";
 
 export const DataContext = createContext([{}]);
 
-interface Data {
+interface IData {
   data: {
     black: {
       rating: number;
@@ -29,8 +29,36 @@ interface Data {
   }[];
 }
 
-export const DataProvider = (props: any) => {
-  const [data, setData] = useState<Data[] | undefined>([]);
+interface IFlattenData {
+  url: string;
+  pgn: string;
+  time_control: string;
+  end_time: number;
+  rated: boolean;
+  fen: string;
+  time_class: string;
+  rules: string;
+  white: {
+    rating: number;
+    result: string;
+    username: string;
+  };
+  black: {
+    rating: number;
+    result: string;
+    username: string;
+  };
+  date: Date;
+}
+
+interface IPromiseData {
+  data: { games: [] };
+  status: number;
+  statusText: string;
+}
+
+export const DataProvider = (props: { children: React.ReactNode }) => {
+  const [data, setData] = useState<IData[] | undefined>([]);
   const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
@@ -41,10 +69,12 @@ export const DataProvider = (props: any) => {
         );
 
         if (result.data.archives.length !== 0) {
-          let promises: any[] = [];
+          let promises: IPromiseData[] = [];
 
           result.data.archives.forEach((d: string) => {
-            promises.push(axios.get(d));
+            promises.push((((axios.get(
+              d
+            ) as unknown) as AxiosStatic) as unknown) as AxiosResponse);
           });
 
           const allData = await Promise.all(promises);
@@ -53,11 +83,11 @@ export const DataProvider = (props: any) => {
             (d: { data: { games: [] } }) => d.data.games
           );
 
-          let resultsFlatten = results.flat();
+          let resultsFlatten: IFlattenData[] = results.flat();
 
           const parseTime = timeParse("%Y.%m.%d %H:%M:%S");
 
-          resultsFlatten.forEach((d: any) => {
+          resultsFlatten.forEach(d => {
             d.date = parseTime(
               `${d.pgn
                 .split("\n")[2]
@@ -67,8 +97,6 @@ export const DataProvider = (props: any) => {
                 .replace('[EndTime "', "")
                 .replace('"]', "")}`
             ) as Date;
-
-
           });
 
           const dateMinFilter = new Date(2019, 0, 1);
@@ -77,7 +105,7 @@ export const DataProvider = (props: any) => {
             return d.date >= dateMinFilter;
           });
 
-          setData(resultsFlatten);
+          setData(resultsFlatten as []);
         }
       } catch (error) {
         setError(true);
