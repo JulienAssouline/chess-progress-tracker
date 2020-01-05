@@ -1,8 +1,11 @@
 import React from "react";
-import {IAxisLeftProps} from "./axisInterface/axis.interface"
+import { IAxisLeftNumber } from "./axisInterface/axis.interface";
 
-export const AxisLeftPercent: React.FC<IAxisLeftProps> = ({ yScale, width }) =>
-  yScale.ticks(5).map((tickValue: number) => (
+export const AxisLeftPercent: React.FC<IAxisLeftNumber> = ({
+  yScale,
+  width
+}) => {
+  const axis = yScale.ticks(5).map((tickValue: number) => (
     <g key={tickValue} className="tick">
       <line
         style={{ stroke: "#e4e5eb" }}
@@ -20,3 +23,5 @@ export const AxisLeftPercent: React.FC<IAxisLeftProps> = ({ yScale, width }) =>
       </text>
     </g>
   ));
+  return <>{axis}</>;
+};
