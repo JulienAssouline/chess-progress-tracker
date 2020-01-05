@@ -17,5 +17,5 @@ export const AxisBottomNumber: React.FC<IAxisBottomProps> = ({
       </text>
     </g>
   ));
-  return <div>{axis}</div>;
+  return <>{axis}</>;
 };

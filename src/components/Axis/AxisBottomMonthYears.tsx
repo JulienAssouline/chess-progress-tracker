@@ -18,5 +18,5 @@ export const AxisBottomMonthYears: React.FC<IAxisBottomMonthsProps> = ({
       </text>
     </g>
   ));
-  return <div> {axis} </div>;
+  return <> {axis} </>;
 };

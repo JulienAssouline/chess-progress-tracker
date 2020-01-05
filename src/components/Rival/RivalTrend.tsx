@@ -57,7 +57,6 @@ const RivalTrend: React.FC<IRivalTrendProps> = ({ data }) => {
     .y1(d => yScale(d[1]));
 
   const colors = scaleOrdinal(["#6b75c4", "#dfe0e9", "grey"]);
-  colors.domain(keys);
 
   const paths: object[] = series.map((d: PathSeries, i: number) => (
     <path

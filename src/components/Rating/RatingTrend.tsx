@@ -1,18 +1,29 @@
 import React from "react";
-import { w, h, width, height, margin, xtickFormat } from "../../utils/chart_utils";
+import {
+  w,
+  h,
+  width,
+  height,
+  margin,
+  xtickFormat
+} from "../../utils/chart_utils";
 import { scaleLinear, scaleTime } from "d3-scale";
 import { extent } from "d3-array";
 import { line, curveMonotoneX } from "d3-shape";
 import { AxisBottomMonthYears } from "../Axis/AxisBottomMonthYears";
 import { AxisLeft } from "../Axis/AxisLeft";
-import { IRatingTrendProps, ILineType } from "./ratingInterface/rating.interfaces";
+import {
+  IRatingTrendProps,
+  ILineType
+} from "./ratingInterface/rating.interfaces";
 
 const RatingTrend: React.FC<IRatingTrendProps> = ({ data }) => {
-
-  const [dateMin, dateMax] = extent(data, d => d.date)
+  const [dateMin, dateMax] = extent(data, d => d.date);
   const [ratingMin, ratingMax] = extent(data, d =>
     d.black.username === "JulienAssouline" ? d.black.rating : d.white.rating
   );
+
+  console.log(data);
 
   const xScale = scaleTime()
     .domain([dateMin as Date, dateMax as Date])
