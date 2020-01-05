@@ -87,7 +87,7 @@ const Monthly: React.FC = () => {
     .curve(curveMonotoneX);
 
   const handleYearChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setYear(Number(event.target.value as string) as any);
+    setYear(Number(event.target.value as string));
   };
 
   const monthsPaths = nestedData.map((months, index) => (

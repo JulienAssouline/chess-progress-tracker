@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 import { Theme, makeStyles } from "@material-ui/core/styles";
 import {
   Drawer,
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-interface DetailProps extends RouteComponentProps<{ push: any }> {}
+interface DetailProps extends RouteComponentProps {}
 
 interface NavData {
   header: string;
@@ -52,28 +52,27 @@ const SideNav: React.FC<DetailProps> = props => {
 
   // TODO: Find a better solution and clean up code!!
 
-  function handleClick(e: any) {
-
-    if (e.target.childNodes[0].childNodes[0]) {
-      if (e.target.childNodes[0].childNodes[0].innerHTML === "Home") {
+  function handleClick(e: MouseEvent): void {
+    const target = e.target as HTMLInputElement;
+    const childNodes = target.childNodes[0].childNodes[0] as HTMLElement;
+    if (childNodes) {
+      if (childNodes.innerHTML === "Home") {
         props.history.push("/");
-      } else if (
-        e.target.childNodes[0].childNodes[0].innerHTML === "vs Pazuzu"
-      ) {
+      } else if (childNodes.innerHTML === "vs Pazuzu") {
         props.history.push("/rival");
-      } else if (e.target.childNodes[0].childNodes[0].innerHTML === "Monthly") {
+      } else if (childNodes.innerHTML === "Monthly") {
         props.history.push("/monthly");
-      } else if (e.target.childNodes[0].childNodes[0].innerHTML === "Summary") {
+      } else if (childNodes.innerHTML === "Summary") {
         props.history.push("/summary");
       }
     } else {
-      if (e.target.innerHTML === "Home") {
+      if (target.innerHTML === "Home") {
         props.history.push("/");
-      } else if (e.target.innerHTML === "vs Pazuzu") {
+      } else if (target.innerHTML === "vs Pazuzu") {
         props.history.push("/rival");
-      } else if (e.target.innerHTML === "Monthly") {
+      } else if (target.innerHTML === "Monthly") {
         props.history.push("/monthly");
-      } else if (e.target.innerHTML === "Summary") {
+      } else if (target.innerHTML === "Summary") {
         props.history.push("/summary");
       }
     }
@@ -90,18 +89,22 @@ const SideNav: React.FC<DetailProps> = props => {
     >
       <Divider />
       <List className={classes.listInfo}>
-        {navText.map((d, index) => (
+        {navText.map(d => (
           <div key={d.header}>
             {d.pathname === props.location.pathname ? (
               <ListItem
-                onClick={handleClick}
+                onClick={(e: MouseEvent) => handleClick(e)}
                 className={classes.listItem}
                 button
               >
                 <ListItemText primary={d.header} />
               </ListItem>
             ) : (
-              <ListItem onClick={handleClick} button key={d.header}>
+              <ListItem
+                onClick={(e: MouseEvent) => handleClick(e)}
+                button
+                key={d.header}
+              >
                 <ListItemText secondary={d.header} />
               </ListItem>
             )}
