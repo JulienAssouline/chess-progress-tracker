@@ -1,9 +1,7 @@
-import { number } from "prop-types";
-
 export let w: number = 800,
   h: number = 400;
 
-interface Dir {
+interface IMargin {
   right: number;
   left: number;
   top: number;
@@ -15,7 +13,7 @@ export let margin = {
   left: 40,
   top: 10,
   bottom: 40
-} as Dir;
+} as IMargin;
 
 export let width: number = w - margin.right - margin.left,
   height: number = h - margin.top - margin.bottom;
@@ -35,18 +33,7 @@ export const xtickFormat: string[] = [
   "Dec"
 ];
 
-interface Margin {
-  right: number;
-  left: number;
-  top: number;
-  bottom: number;
-}
-
-interface Padding {
-  w: number;
-  h: number;
-  margin: Margin;
-}
+// TODO: improve this so that the margin obj properties are not all required
 
 export const chartPadding = ({
   w = 600,
