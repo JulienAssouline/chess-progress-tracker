@@ -10,6 +10,7 @@ import {
 import { Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { nest } from "d3-collection";
+import Loading from "../Loading/Loading";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -65,7 +66,12 @@ const Rating: React.FC = () => {
     fetchData();
   }, []);
 
-  if (data.length === 0 || !stats) return <div>...loading</div>;
+  if (data.length === 0 || !stats)
+    return (
+      <>
+        <Loading />
+      </>
+    );
   if (error) return <div> Oh no there was an error :( </div>;
 
   const OpponentsCount = nest<ISummaryData, number>()
