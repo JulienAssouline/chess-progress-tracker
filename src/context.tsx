@@ -64,9 +64,12 @@ export const DataProvider = (props: { children: React.ReactNode }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await axios(
-          "https://api.chess.com/pub/player/julienassouline/games/archives"
-        );
+        const url =
+          "https://api.chess.com/pub/player/julienassouline/games/archives";
+        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        const result = await axios(`${proxyurl}${url}`, {
+          headers: { "Access-Control-Allow-Origin": "*" }
+        });
 
         if (result.data.archives.length !== 0) {
           let promises: IPromiseData[] = [];
