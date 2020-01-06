@@ -4,15 +4,17 @@ import { max } from "d3-array";
 import { AxisLeftString } from "../Axis/AxisLeftString";
 import { AxisBottomNumber } from "../Axis/AxisBottomNumber";
 import { IResultTypeProps } from "./summaryInterfaces/summary.interfaces";
+import { chartPadding } from "../../utils/chart_utils";
 
-const GameResultTypeChart: React.FC<IResultTypeProps> = ({
-  data,
-  w,
-  h,
-  margin,
-  height,
-  width
-}) => {
+const GameResultTypeChart: React.FC<IResultTypeProps> = ({ data, padding }) => {
+  padding = chartPadding({
+    w: 400,
+    h: 200,
+    margin: { left: 110, top: 20, bottom: 40, right: 40 }
+  });
+
+  const { w, h, margin, width, height } = padding;
+
   data.sort((a, b) => (a.value as number) - (b.value as number));
 
   const monthsCountMax = max(data, d => d.value);

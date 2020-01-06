@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { DataContext } from "../../context";
 import { nest } from "d3-collection";
-import { xtickFormat } from "../../utils/chart_utils";
+import { xtickFormat, chartPadding } from "../../utils/chart_utils";
 import MonthlyCountBarChart from "./MonthlyCountBarChart";
 import GameResultTypeChart from "./GameResultTypeChart";
 import ResultChart from "./ResultChart";
@@ -29,25 +29,7 @@ const Summary: React.FC = () => {
 
   if (data.length === 0) return <div>...loading</div>;
 
-  let w: number = 600,
-    h: number = 200;
-
-  interface Dir {
-    right: number;
-    left: number;
-    top: number;
-    bottom: number;
-  }
-
-  let margin = {
-    right: 40,
-    left: 110,
-    top: 20,
-    bottom: 40
-  } as Dir;
-
-  let width: number = w - margin.right - margin.left,
-    height: number = h - margin.top - margin.bottom;
+  const padding = chartPadding({});
 
   const years = [
     ...((new Set(data.map(d => d.date.getFullYear())) as unknown) as [number])
@@ -106,30 +88,17 @@ const Summary: React.FC = () => {
         </FormControl>
       </div>
       <div className="header-charts">
-        <MonthlyCountBarChart
-          data={gamesPlayedByMonth}
-          width={width}
-          height={height}
-          margin={margin}
-          w={w}
-          h={h}
-        />
-        <GameResultTypeChart
-          data={countGameResultType}
-          width={width}
-          height={height}
-          margin={margin}
-          w={400}
-          h={300}
-        />
+        <MonthlyCountBarChart data={gamesPlayedByMonth} padding={padding} />
+        <GameResultTypeChart data={countGameResultType} padding={padding} />
       </div>
       <div className="result-charts">
+        <OpponentRatingTrend data={selectedYearData as []} padding={padding} />
         <ResultChart
           gamesWon={gamesWon.length}
           gamesDrawn={gamesDrawn.length}
           gamesLost={gamesLost.length}
+          padding={padding}
         />
-        <OpponentRatingTrend data={selectedYearData as []} />
       </div>
     </div>
   );

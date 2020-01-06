@@ -23,8 +23,6 @@ const RatingTrend: React.FC<IRatingTrendProps> = ({ data }) => {
     d.black.username === "JulienAssouline" ? d.black.rating : d.white.rating
   );
 
-  console.log(data);
-
   const xScale = scaleTime()
     .domain([dateMin as Date, dateMax as Date])
     .range([0, width]);

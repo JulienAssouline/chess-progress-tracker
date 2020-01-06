@@ -3,31 +3,18 @@ import { scaleLinear, scaleBand } from "d3-scale";
 import { AxisLeftString } from "../Axis/AxisLeftString";
 import { AxisBottomNumber } from "../Axis/AxisBottomNumber";
 import { IResultChartProps } from "./summaryInterfaces/summary.interfaces";
+import { chartPadding } from "../../utils/chart_utils";
 
 const ResultChart: React.FC<IResultChartProps> = ({
   gamesWon,
   gamesDrawn,
-  gamesLost
+  gamesLost,
+  padding
 }) => {
-  let w: number = 400,
-    h: number = 200;
-
-  interface Dir {
-    right: number;
-    left: number;
-    top: number;
-    bottom: number;
-  }
-
-  let margin = {
-    right: 40,
-    left: 40,
-    top: 40,
-    bottom: 40
-  } as Dir;
-
-  let width: number = w - margin.right - margin.left,
-    height: number = h - margin.top - margin.bottom;
+  padding = chartPadding({
+    w: 400
+  });
+  const { w, h, margin, width, height } = padding;
 
   const xScale = scaleLinear()
     .domain([0, gamesWon])

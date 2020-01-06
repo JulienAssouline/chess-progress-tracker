@@ -13,26 +13,11 @@ import {
   LineType
 } from "./summaryInterfaces/summary.interfaces";
 
-const OpponentRatingTrend: React.FC<IOpponentRatingProps> = ({ data }) => {
-  let w: number = 600,
-    h: number = 200;
-
-  interface Dir {
-    right: number;
-    left: number;
-    top: number;
-    bottom: number;
-  }
-
-  let margin = {
-    right: 40,
-    left: 40,
-    top: 40,
-    bottom: 40
-  } as Dir;
-
-  let width: number = w - margin.right - margin.left,
-    height: number = h - margin.top - margin.bottom;
+const OpponentRatingTrend: React.FC<IOpponentRatingProps> = ({
+  data,
+  padding
+}) => {
+  const { w, h, margin, width, height } = padding;
 
   const formatTime = timeFormat("%b %d %Y");
   const parseTime = timeParse("%b %d %Y");
