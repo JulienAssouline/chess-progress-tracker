@@ -18,8 +18,10 @@ import {
 } from "./ratingInterface/rating.interfaces";
 
 const RatingTrend: React.FC<IRatingTrendProps> = ({ data }) => {
-  const [dateMin, dateMax] = extent(data, d => d.date);
-  const [ratingMin, ratingMax] = extent(data, d =>
+  const dataFiltered = data.filter(d => d.time_class === "blitz");
+
+  const [dateMin, dateMax] = extent(dataFiltered, d => d.date);
+  const [ratingMin, ratingMax] = extent(dataFiltered, d =>
     d.black.username === "JulienAssouline" ? d.black.rating : d.white.rating
   );
 
@@ -52,7 +54,7 @@ const RatingTrend: React.FC<IRatingTrendProps> = ({ data }) => {
           />
           <AxisLeft width={width} yScale={yScale} />
           <path
-            d={path(data) as string}
+            d={path(dataFiltered) as string}
             style={{ fill: "none", stroke: "#6b75c4", strokeWidth: 3 }}
           />
         </g>
