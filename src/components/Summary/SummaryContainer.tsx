@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const Summary: React.FC = () => {
   const data = useContext(DataContext) as ISummaryData[];
   const classes = useStyles();
-  const [year, setYear] = useState(0);
+  const [year, setYear] = useState(1);
 
   if (data.length === 0) return <div>...loading</div>;
 
