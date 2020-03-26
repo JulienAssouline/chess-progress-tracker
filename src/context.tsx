@@ -58,7 +58,7 @@ export const DataProvider = (props: { children: React.ReactNode }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = "http://localhost:8080/chess-games";
+        const url = "https://chess-app-tracker.herokuapp.com/chess-games";
         const result = await axios(url);
 
         let resultsFlatten: IFlattenData[] = result.data.flat();
